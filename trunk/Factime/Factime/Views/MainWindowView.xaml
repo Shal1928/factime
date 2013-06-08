@@ -1,0 +1,10 @@
+﻿<Base:ViewBase x:Class="Factime.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM" 
+        Title="Factime" 
+        Width="525" Height="350">
+    <Grid>
+        
+    </Grid>
+</Base:ViewBase>
