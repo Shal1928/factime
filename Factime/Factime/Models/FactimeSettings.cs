@@ -41,5 +41,12 @@ namespace Factime.Models
             get;
             set;
         }
+
+        [DataMember]
+        public string OutputPath
+        {
+            get; 
+            set;
+        }
     }
 }
