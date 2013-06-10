@@ -68,6 +68,8 @@
     <Compile Include="Models\CalendarDayBase.cs" />
     <Compile Include="Models\DayType.cs" />
     <Compile Include="Models\FactimeSettings.cs" />
+    <Compile Include="Models\FactoryCalendar.cs" />
+    <Compile Include="Stores\CalendarDayStore.cs" />
     <Compile Include="Stores\FactimeSettingsStore.cs" />
     <Compile Include="Stores\FileStore.cs" />
     <Compile Include="Stores\XMLStore.cs" />
