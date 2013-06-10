@@ -68,6 +68,8 @@
     <Compile Include="Models\CalendarDayBase.cs" />
     <Compile Include="Models\DayType.cs" />
     <Compile Include="Models\FactimeSettings.cs" />
+    <Compile Include="Stores\FileStore.cs" />
+    <Compile Include="Stores\XMLStore.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -99,9 +101,17 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.IoC\UseAbilities.IoC.csproj">
+      <Project>{B855AE04-A938-472C-BA0A-1A546D5A3FEB}</Project>
+      <Name>UseAbilities.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.MVVM\UseAbilities.MVVM.csproj">
       <Project>{8AC0BF72-84A5-4E2E-9A85-1DEF2167B51E}</Project>
       <Name>UseAbilities.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.XML\UseAbilities.XML.csproj">
+      <Project>{F4863115-63AF-4DBC-A8EE-9771426DAEB0}</Project>
+      <Name>UseAbilities.XML</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
