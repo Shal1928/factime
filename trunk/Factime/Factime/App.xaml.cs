@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using Factime.Models;
+using Factime.Stores;
 using Factime.ViewModels;
 using Factime.Views;
+using UseAbilities.IoC.Core;
+using UseAbilities.IoC.Helpers;
+using UseAbilities.IoC.Stores;
 using UseAbilities.MVVM.Managers;
 
 namespace Factime
@@ -22,17 +27,16 @@ namespace Factime
             ViewManager.RegisterViewViewModelRelations(relationsViewToViewModel);
             ViewModelManager.ActiveViewModels.CollectionChanged += ViewManager.OnViewModelsCoolectionChanged;
 
-            var startupWindow = new MainWindowViewModel();
-            //Loader(StaticHelper.IoCcontainer);
+            Loader(StaticHelper.IoCcontainer);
 
-            //var startupWindow = StaticHelper.IoCcontainer.Resolve<MainWindowViewModel>();
+            var startupWindow = StaticHelper.IoCcontainer.Resolve<MainWindowViewModel>();
             startupWindow.Show();
         }
 
-        //private static void Loader(IoC ioc)
-        //{
-        //    ioc.RegisterSingleton<IXmlStore<HitSettings>, HitSettingsStore>();
-        //    //ioc.RegisterSingleton<DBStore<Requests>, RequestsDBStore>();
-        //}
+        private static void Loader(IoC ioc)
+        {
+            ioc.RegisterSingleton<IXmlStore<FactimeSettings>, FactimeSettingsStore>();
+            //ioc.RegisterSingleton<DBStore<Requests>, RequestsDBStore>();
+        }
     }
 }
