@@ -158,11 +158,12 @@
                                 <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
                             </Rectangle.Fill>
                         </Rectangle>
-                        <Rectangle x:Name="SelectedBackground" RadiusX="1" RadiusY="1" Opacity="0">
+                        <!--<Rectangle x:Name="SelectedBackground" RadiusX="1" RadiusY="1" Opacity="0">
                             <Rectangle.Fill>
                                 <SolidColorBrush Color="{DynamicResource SelectedBackgroundColor}" />
                             </Rectangle.Fill>
-                        </Rectangle>
+                        </Rectangle>-->
+                        <Border x:Name="SelectedBackground" BorderBrush="{DynamicResource SelectedBackgroundColorBrush}"  CornerRadius="1" Opacity="0" />
                         <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" />
                         <Rectangle x:Name="HighlightBackground" RadiusX="1" RadiusY="1" Opacity="0">
                             <Rectangle.Fill>
@@ -549,6 +550,11 @@
     <Color x:Key="DisabledForegroundColor">#FF888888</Color>
 
     <Color x:Key="SelectedBackgroundColor">violet</Color>
+    <SolidColorBrush x:Key="SelectedBackgroundColorBrush">
+        <SolidColorBrush.Color>
+            <Color>violet</Color>
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
     <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
 
     <Color x:Key="ControlLightColor">White</Color>
@@ -582,30 +588,19 @@
 
     <Color x:Key="NavButtonFrameColor">#ffDDDDDD</Color>
 
-    <LinearGradientBrush x:Key="MenuPopupBrush"
-                     EndPoint="0.5,1"
-                     StartPoint="0.5,0">
-        <GradientStop Color="{DynamicResource ControlLightColor}"
-                Offset="0" />
-        <GradientStop Color="{DynamicResource ControlMediumColor}"
-                Offset="0.5" />
-        <GradientStop Color="{DynamicResource ControlLightColor}"
-                Offset="1" />
+    <LinearGradientBrush x:Key="MenuPopupBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{DynamicResource ControlLightColor}" Offset="0" />
+        <GradientStop Color="{DynamicResource ControlMediumColor}" Offset="0.5" />
+        <GradientStop Color="{DynamicResource ControlLightColor}" Offset="1" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill"
-                     StartPoint="0,0"
-                     EndPoint="1,0">
+    <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" StartPoint="0,0" EndPoint="1,0">
         <LinearGradientBrush.GradientStops>
             <GradientStopCollection>
-                <GradientStop Color="#000000FF"
-                    Offset="0" />
-                <GradientStop Color="#600000FF"
-                    Offset="0.4" />
-                <GradientStop Color="#600000FF"
-                    Offset="0.6" />
-                <GradientStop Color="#000000FF"
-                    Offset="1" />
+                <GradientStop Color="#000000FF" Offset="0" />
+                <GradientStop Color="#600000FF" Offset="0.4" />
+                <GradientStop Color="#600000FF" Offset="0.6" />
+                <GradientStop Color="#000000FF" Offset="1" />
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
