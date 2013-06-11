@@ -84,20 +84,6 @@ namespace Factime.Stores
             return calendarDayCollection;
         }
 
-        //public static void TellAbout(string attribute, string message, bool isNew = false)
-        //{
-        //    Directory.CreateDirectory(Directory.GetParent(ConfigurationManager.Config.TxtLogFilePath).FullName);
-
-        //    var file = new StreamWriter(ConfigurationManager.Config.TxtLogFilePath, !isNew);
-
-        //    if (string.IsNullOrEmpty(attribute)) file.WriteLine("{0}", message);
-        //    else file.WriteLine("{0}:{1}", attribute, message);
-
-        //    file.Close();
-        //}
-
-
-
         private char _splitter = ' ';
         public char Splitter
         {
