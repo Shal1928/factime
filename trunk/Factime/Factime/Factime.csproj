@@ -65,6 +65,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DataGridStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +79,7 @@
     </Compile>
     <Compile Include="Behaviors\RadiobuttonPreviewEventBehavior.cs" />
     <Compile Include="Controls\CalendarDayChecker.cs" />
+    <Compile Include="Controls\DataGridTemplateColumnExt.cs" />
     <Compile Include="Controls\TestUserControl.xaml.cs">
       <DependentUpon>TestUserControl.xaml</DependentUpon>
     </Compile>
@@ -83,6 +88,7 @@
     <Compile Include="Models\DayType.cs" />
     <Compile Include="Models\FactimeSettings.cs" />
     <Compile Include="Models\FactoryCalendar.cs" />
+    <Compile Include="Models\WeekWrapper.cs" />
     <Compile Include="Stores\CalendarDayStore.cs" />
     <Compile Include="Stores\FactimeSettingsStore.cs" />
     <Compile Include="Stores\FileStore.cs" />
@@ -92,6 +98,10 @@
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\TemplatesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -118,6 +128,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Extensions\UseAbilities.Extensions.csproj">
+      <Project>{C3286D0A-9826-4681-AB99-E0056239D253}</Project>
+      <Name>UseAbilities.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.IoC\UseAbilities.IoC.csproj">
       <Project>{B855AE04-A938-472C-BA0A-1A546D5A3FEB}</Project>
       <Name>UseAbilities.IoC</Name>
@@ -125,6 +139,10 @@
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.MVVM\UseAbilities.MVVM.csproj">
       <Project>{8AC0BF72-84A5-4E2E-9A85-1DEF2167B51E}</Project>
       <Name>UseAbilities.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.WPF\UseAbilities.WPF.csproj">
+      <Project>{DE840968-7F50-41F7-B88A-59ADD6B61D73}</Project>
+      <Name>UseAbilities.WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.XML\UseAbilities.XML.csproj">
       <Project>{F4863115-63AF-4DBC-A8EE-9771426DAEB0}</Project>

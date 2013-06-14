@@ -9,6 +9,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Views\CalendarStyle.xaml" />
+                <ResourceDictionary Source="/Views\DataGridStyleDictionary.xaml" />
+                <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -30,7 +32,27 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Calendar />
+        <DataGrid ItemsSource="{Binding WeekCollections}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="MondayColumn" CellTemplate="{StaticResource MondayTemplate}" Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <!--<DataGridTemplateColumn.CellTemplate>
+                        
+                    </DataGridTemplateColumn.CellTemplate>-->
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn CellStyle="{DynamicResource SimplyCellStyle}" Header="Image" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Monday.Date}" />-->
+            </DataGrid.Columns>
+            <!--<DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <Label Content="{Binding Title}"/>
+                        <Label Content="{Binding FirstName}"/>
+                        <Label Content="{Binding LastName}"/>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>-->
+
+
+        </DataGrid>
         
     </Grid>
 </Base:ViewBase>

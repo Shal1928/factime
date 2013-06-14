@@ -1,0 +1,219 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF">
+    
+    <!-- Content for the template (note: not a template itself) -->
+    <Border x:Shared="False" x:Key="Foo" BorderBrush="Red" BorderThickness="1" CornerRadius="4">
+        <TextBlock Text="{Binding SomeProp}" />
+    </Border>
+
+    <DataTemplate x:Key="TemplateA">
+        <!-- Static resource - No binding needed -->
+        <ContentPresenter Content="{StaticResource Foo}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateB">
+        <!-- Static resource - No binding needed -->
+        <ContentPresenter Content="{StaticResource Foo}" />
+    </DataTemplate>
+
+    <!--<Style x:Key="CellGridStyle" TargetType="{x:Type Grid}">
+        <Setter Property="ColumnDefinition" Value="" />
+        
+    </Style>-->
+    
+    <Style x:Key="TextPresenter" TargetType="{x:Type TextBlock}">
+        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding DisplayIndex, ElementName=MondayColumn, Converter={Test:TestConverter}}" Value="1">
+                
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RadioButtonPresenter" TargetType="{x:Type RadioButton}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#22000000" />
+
+        <Setter Property="Grid.Column" Value="1" />
+    </Style>
+
+    <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Content" Value="Вых." />
+        <Setter Property="Grid.Row" Value="0" />
+    </Style>
+    <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Content" Value="Пред." />
+        <Setter Property="Grid.Row" Value="1" />
+        <!--<Setter Property="Foreground" Value="Red" />-->
+    </Style>
+    <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Content" Value="Раб." />
+        <Setter Property="Grid.Row" Value="2" />
+    </Style>
+    
+    
+    <DataTemplate x:Key="MondayTemplate">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--<ContentPresenter Content="{Binding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                              ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
+                              VerticalAlignment="Center" Margin="5,3,5,3" 
+                              Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />-->
+            <TextBlock Text="{Binding Monday.Date}" Style="{DynamicResource TextPresenter}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+
+            <RadioButton IsChecked="True" Style="{DynamicResource HolydayRadioButtonPresenter}" />
+            <RadioButton Style="{DynamicResource PreHolidayRadioButtonPresenter}" />
+            <RadioButton Style="{DynamicResource WorkdayRadioButtonPresenter}" />
+
+        </Grid>
+    </DataTemplate>
+
+    <!--***********************************-->
+    <!--*                                 *-->
+    <!--*   AddValueCellEditingTemplate   *-->
+    <!--*                                 *-->
+    <!--****************V******************-->
+
+    <!--Create TemplateSelector for all variants-->
+    <ControlTemplate x:Key="AddValueCellEditingTemplate">
+        <!--<TextBlock Text="{Binding}" Padding="0" />-->
+        <!--<ContentPresenter Content="{TemplateBinding Content}">
+
+        </ContentPresenter>-->
+        <Grid Background="Red">
+
+            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                          HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                          Margin="8,0,8,0"/>
+        </Grid>
+    </ControlTemplate>
+
+
+
+    <!--***********************************-->
+    <!--*                                 *-->
+    <!--*   DefaultDataGridCellTemplate   *-->
+    <!--*                                 *-->
+    <!--****************V******************-->
+
+    <ControlTemplate x:Key="DefaultDataGridCellTemplate" TargetType="DataGridCell">
+        <StackPanel Orientation="Horizontal" >
+            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
+                    BorderBrush="{TemplateBinding Border.BorderBrush}" 
+                    Background="{TemplateBinding Panel.Background}" 
+                    SnapsToDevicePixels="True">
+<!--TemplateBinding ContentControl.Content-->
+                <!--<ContentPresenter VerticalAlignment="Center"
+                                  Content="{Binding Monday.Date}" 
+                                  Margin="5,3,5,3"
+                                  ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
+                                  ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
+                                  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />-->
+
+                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                          HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                          Margin="8,0,8,0"/>
+                
+            </Border>
+            <Button Content="+" />
+        </StackPanel>
+
+    </ControlTemplate>
+
+
+
+    <!--***********************************-->
+    <!--*                                 *-->
+    <!--*   DefaultDataGridColumnHeader   *-->
+    <!--*                                 *-->
+    <!--****************V******************-->
+
+    <ControlTemplate x:Key="DefaultDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
+        <ControlTemplate.Resources>
+            <Style TargetType="{x:Type Thumb}">
+                <Setter Property="FrameworkElement.Width" Value="1"/>
+                <Setter Property="FrameworkElement.Cursor" Value="SizeWE"/>
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Thumb">
+                            <Border Background="{TemplateBinding Background}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SortPathStyle" TargetType="{x:Type Path}">
+                <Setter Property="Fill" Value="#cc000000"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5,70,5,0"/>
+                <Setter Property="Visibility" Value="Hidden"/>
+            </Style>
+        </ControlTemplate.Resources>
+
+        <Grid>
+            <Border Name="MainBorder" Background="{DynamicResource GridHeaderGradientBrush}">
+
+                <Grid>
+                    <ContentPresenter Margin="1,3,1,0" 
+                                      HorizontalAlignment="Left" 
+                                      VerticalAlignment="Center" 
+                                      Content="{TemplateBinding Content}"
+                                      ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Grid>
+            </Border>
+
+            <Path Name="UpArrow" Style="{StaticResource SortPathStyle}">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure StartPoint="0,0">
+                            <LineSegment Point="7,0"/>
+                            <LineSegment Point="3.5,6"/>
+                            <LineSegment Point="0,0"/>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+
+            <Path Name="DownArrow" Style="{StaticResource SortPathStyle}">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure StartPoint="0,6">
+                            <LineSegment Point="7,6"/>
+                            <LineSegment Point="3.5,0"/>
+                            <LineSegment Point="0,6"/>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+
+            <Thumb Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Background="#F7FEF7"/>
+            <Thumb Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Background="#C6D7C5"/>
+
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="SortDirection" Value="Descending">
+                <Setter TargetName="UpArrow" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="DownArrow" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="SortDirection" Value="Ascending">
+                <Setter TargetName="DownArrow" Property="Visibility" Value="Hidden"/>
+                <Setter TargetName="UpArrow" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
+    </ControlTemplate>
+
+</ResourceDictionary>
