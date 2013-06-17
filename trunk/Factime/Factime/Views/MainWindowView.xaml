@@ -33,26 +33,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding WeekCollections}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding WeekCollection}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Tuesday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вт" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Wednesday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Ср" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Thrusday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Чт" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Thursday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Чт" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Friday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пт" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Saturday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Сб" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
                 <!--<DataGridTextColumn CellStyle="{DynamicResource SimplyCellStyle}" Header="Image" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Monday.Date}" />-->
             </DataGrid.Columns>
-            <!--<DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <DockPanel>
-                        <Label Content="{Binding Title}"/>
-                        <Label Content="{Binding FirstName}"/>
-                        <Label Content="{Binding LastName}"/>
-                    </DockPanel>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>-->
 
 
         </DataGrid>

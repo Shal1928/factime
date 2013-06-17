@@ -2,6 +2,11 @@
 {
     public class WeekWrapper
     {
+        public WeekWrapper(int curentMonth)
+        {
+            CurrentMonth = curentMonth;
+        }
+
         public CalendarDay Monday
         {
             get; 
@@ -41,6 +46,12 @@
         public CalendarDay Sunday
         {
             get;
+            set;
+        }
+
+        public int CurrentMonth
+        {
+            get; 
             set;
         }
     }
