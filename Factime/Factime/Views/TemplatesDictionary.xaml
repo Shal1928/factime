@@ -118,7 +118,7 @@
         
         <Style.Triggers>
             <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                <Setter Property="Visibility" Value="Hidden" />
+                <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

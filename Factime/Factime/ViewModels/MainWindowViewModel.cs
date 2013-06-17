@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Data;
 using Factime.Models;
 using UseAbilities.Extensions.DateTimeExt;
+using UseAbilities.Extensions.EnumerableExt;
 using UseAbilities.MVVM.Base;
 
 namespace Factime.ViewModels
@@ -11,23 +15,26 @@ namespace Factime.ViewModels
     {
         public MainWindowViewModel()
         {
-            var weeks = DateTime.Now.GetWeeksAndDaysOfMonth();
-            var weekCollection = new ObservableCollection<WeekWrapper>();
-
-            foreach (var week in weeks)
-                weekCollection.Add(WrapCalendarDays(week));
+            var weekCollection = new List<WeekWrapper>();
             
+            for (var i = 1; i <= 12; i++)
+            {
+                var date = new DateTime(DateTime.Now.Year, i, 1);
+                var weeks = date.GetWeeksAndDaysOfMonth();
 
-            WeekCollections = weekCollection;
+                weekCollection.AddRange(weeks.Select(week => WrapCalendarDays(week, i)));
+            }
+
+            UpdateWeekCollections(weekCollection);
         }
 
-        private WeekWrapper WrapCalendarDays(List<DateTime> week)
+        private static WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
         {
-            var weekWrapper = new WeekWrapper();
+            var weekWrapper = new WeekWrapper(currentMonth);
 
             var startTime = new TimeSpan(9, 00, 00);
             var endTime = new TimeSpan(18, 30, 00);
-
+            
             weekWrapper.Monday = new CalendarDay
             {
                 Date = week[0],
@@ -81,18 +88,68 @@ namespace Factime.ViewModels
             return weekWrapper;
         }
 
-        private ObservableCollection<WeekWrapper> _weekCollections;
-        public ObservableCollection<WeekWrapper> WeekCollections
+        //private ObservableCollection<WeekWrapper> _weekCollections;
+        //public ObservableCollection<WeekWrapper> WeekCollections
+        //{
+        //    get
+        //    {
+        //        return _weekCollections;
+        //    }
+        //    set
+        //    {
+        //        _weekCollections = value;
+        //        OnPropertyChanged(() => WeekCollections);
+        //    }
+        //}
+
+        private int _selectedMonth = 6;
+        public int SelectedMonth
         {
             get
             {
-                return _weekCollections;
+                return _selectedMonth;
             }
             set
             {
-                _weekCollections = value;
-                OnPropertyChanged(() => WeekCollections);
+                _selectedMonth = value;
+                OnPropertyChanged(() => SelectedMonth);
             }
+        }
+
+        private ICollectionView _weekCollection;
+        public ICollectionView WeekCollection
+        {
+            get
+            {
+                return _weekCollection;
+            }
+            set
+            {
+                _weekCollection = value;
+                OnPropertyChanged(() => WeekCollection);
+            }
+        }
+
+        private void UpdateWeekCollections(List<WeekWrapper> weekCollection)
+        {
+            var view = CollectionViewSource.GetDefaultView(weekCollection);
+            if (view == null) return;
+            view.Filter = FilterPredicate;
+
+            WeekCollection = view;
+        }
+
+        
+        private bool FilterPredicate(object item)
+        {
+            var weekWrapper = item as WeekWrapper;
+            if (weekWrapper == null) return false;
+
+            var date = new DateTime(DateTime.Now.Year, SelectedMonth, 1);
+            var weeks = date.GetWeeksAndDaysOfMonth();
+            var monthes = weeks.Select(week => week.Select(dateTime => dateTime.Month).GetFrequentlyValues(1).FirstOrDefault()).ToList();
+            
+            return monthes.GetFrequentlyValues(1).FirstOrDefault() == weekWrapper.CurrentMonth;
         }
     }
 }
