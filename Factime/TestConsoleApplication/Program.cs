@@ -43,8 +43,9 @@ namespace TestConsoleApplication
                        .Take(5)
                        .Select(g => g.Key);
 
-            //Console.WriteLine(nums2.GetFrequentlyValue().Value);
-            
+            Console.WriteLine(nums.GetFrequentlyValues(1).FirstOrDefault());
+            Console.WriteLine(DateTime.Now.Month);
+
             Console.ReadLine();
         }
     }
