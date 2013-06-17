@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF">
+                    xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF"
+                    xmlns:Models="clr-namespace:Factime.Models">
     
     <!-- Content for the template (note: not a template itself) -->
     <Border x:Shared="False" x:Key="Foo" BorderBrush="Red" BorderThickness="1" CornerRadius="4">
@@ -21,40 +22,78 @@
         <Setter Property="ColumnDefinition" Value="" />
         
     </Style>-->
-    
-    <Style x:Key="TextPresenter" TargetType="{x:Type TextBlock}">
+
+    <!--***   Base TextBlockPresenterStyle ***-->
+    <Style x:Key="TextPresenterBase" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="28" />
+
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
+
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.RowSpan" Value="3" />
         
         <Style.Triggers>
-            <DataTrigger Binding="{Binding DisplayIndex, ElementName=MondayColumn, Converter={Test:TestConverter}}" Value="1">
-                
+            <!--<DataTrigger Binding="{Binding DisplayIndexExt, ElementName=MondayColumn, Converter={Test:TestConverter}}" Value="1">
+                <Setter Property="Background" Value="Red" />
+            </DataTrigger>-->
+            <!--<DataTrigger Binding="{Binding DisplayIndexExt, ElementName=MondayColumn, Converter={Test:TestConverter}}" Value="1">
+                <Setter Property="Background" Value="Red" />
+            </DataTrigger>-->
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextPresenter" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextPresenterBase}">
+        <Setter Property="Text" Value="{Binding Date, StringFormat=dd}" />
+        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}">
+                <Setter Property="Foreground" Value="#88000000" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}">
+                <Setter Property="Foreground" Value="#ff086CA2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}">
+                <Setter Property="Foreground" Value="#ffFF6B40" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
+
+
+    <!--***   Base RadioButtonPresenterStyle ***-->
     <Style x:Key="RadioButtonPresenter" TargetType="{x:Type RadioButton}">
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="Foreground" Value="#22000000" />
+        <Setter Property="Foreground" Value="#55000000" />
 
+        <!--<Setter Property="Margin" Value="5" />-->
         <Setter Property="Grid.Column" Value="1" />
     </Style>
 
     <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Content" Value="Вых." />
+        <Setter Property="Margin" Value="5,5,5,0" />
         <Setter Property="Grid.Row" Value="0" />
-    </Style>
+    </Style>    
     <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Content" Value="Пред." />
+        <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Grid.Row" Value="1" />
         <!--<Setter Property="Foreground" Value="Red" />-->
     </Style>
     <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Content" Value="Раб." />
+        <Setter Property="Margin" Value="5,0,5,5" />
         <Setter Property="Grid.Row" Value="2" />
     </Style>
-    
-    
-    <DataTemplate x:Key="MondayTemplate">
-        <Grid Margin="5">
+
+
+
+
+    <DataTemplate x:Key="DefaultDataGridCellTemplate">
+        <Grid Style="{DynamicResource DefaultGridCellTemplate}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -65,11 +104,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--<ContentPresenter Content="{Binding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
-                              ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
-                              VerticalAlignment="Center" Margin="5,3,5,3" 
-                              Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />-->
-            <TextBlock Text="{Binding Monday.Date}" Style="{DynamicResource TextPresenter}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+            <TextBlock Style="{DynamicResource TextPresenter}" />
 
             <RadioButton IsChecked="True" Style="{DynamicResource HolydayRadioButtonPresenter}" />
             <RadioButton Style="{DynamicResource PreHolidayRadioButtonPresenter}" />
@@ -78,6 +113,39 @@
         </Grid>
     </DataTemplate>
 
+    <Style x:Key="DefaultGridCellTemplate" TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="5" />
+        
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Hidden" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--***********************************-->
     <!--*                                 *-->
     <!--*   AddValueCellEditingTemplate   *-->
@@ -96,38 +164,6 @@
                           HorizontalAlignment="Center"  VerticalAlignment="Center" 
                           Margin="8,0,8,0"/>
         </Grid>
-    </ControlTemplate>
-
-
-
-    <!--***********************************-->
-    <!--*                                 *-->
-    <!--*   DefaultDataGridCellTemplate   *-->
-    <!--*                                 *-->
-    <!--****************V******************-->
-
-    <ControlTemplate x:Key="DefaultDataGridCellTemplate" TargetType="DataGridCell">
-        <StackPanel Orientation="Horizontal" >
-            <Border BorderThickness="{TemplateBinding Border.BorderThickness}" 
-                    BorderBrush="{TemplateBinding Border.BorderBrush}" 
-                    Background="{TemplateBinding Panel.Background}" 
-                    SnapsToDevicePixels="True">
-<!--TemplateBinding ContentControl.Content-->
-                <!--<ContentPresenter VerticalAlignment="Center"
-                                  Content="{Binding Monday.Date}" 
-                                  Margin="5,3,5,3"
-                                  ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" 
-                                  ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" 
-                                  SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />-->
-
-                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                          HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                          Margin="8,0,8,0"/>
-                
-            </Border>
-            <Button Content="+" />
-        </StackPanel>
-
     </ControlTemplate>
 
 
