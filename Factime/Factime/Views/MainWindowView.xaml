@@ -9,8 +9,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views\CalendarStyle.xaml" />
-                <ResourceDictionary Source="/Views\DataGridStyleDictionary.xaml" />
+                <ResourceDictionary Source="/Views\StylesDictionary.xaml" />
                 <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
