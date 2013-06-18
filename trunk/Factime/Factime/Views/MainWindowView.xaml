@@ -35,15 +35,15 @@
 
         <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" >
             <DataGrid.Columns>
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Tuesday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вт" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Wednesday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Ср" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Thursday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Чт" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Friday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пт" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Saturday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Сб" Width="SizeToCells" IsReadOnly="True" />
-                <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Tuesday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Вт" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Wednesday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Ср" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Thursday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Чт" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Friday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Пт" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Saturday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Сб" Width="SizeToCells" IsReadOnly="True" />
+                <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
             </DataGrid.Columns>
-
+            <!--CellTemplate="{StaticResource DefaultDataGridDataTemplate}"-->
 
         </DataGrid>
         

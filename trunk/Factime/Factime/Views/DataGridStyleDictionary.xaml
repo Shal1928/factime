@@ -92,7 +92,12 @@
             </Trigger>-->
             <Trigger Property="DataGridCell.IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource MouseOverGradientBrush}" />
+                <!--<Setter Property="Template" Value="{DynamicResource DefaultCellEditingTemplate}" />-->
             </Trigger>
+            <!--<Trigger Property="DataGridCell.IsMouseOver" Value="False">
+                <Setter Property="Template" Value="{DynamicResource DefaultDataGridCellTemplate}" />
+            </Trigger>-->
+            
         </Style.Triggers>
 
     </Style>
@@ -152,16 +157,16 @@
 
     <LinearGradientBrush x:Key="MouseOverGradientBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
-            <GradientStop Color="{StaticResource LightBlueVankor}" Offset="0" />
-            <GradientStop Color="{StaticResource BlueVankor}" Offset="1" />
+            <GradientStop Color="{StaticResource PinkVankor}" Offset="0" />
+            <GradientStop Color="{StaticResource YellowVankor}" Offset="1" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="HighlightItemGradientBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
-            <GradientStop Color="{StaticResource LightBlueVankor}" Offset="0" />
-            <GradientStop Color="{StaticResource LightBlueVankor}" Offset="0.75" />
-            <GradientStop Color="{StaticResource DarkBlueVankor}" Offset="1" />
+            <GradientStop Color="#ffFFFFFF" Offset="0" />
+            <GradientStop Color="{StaticResource PinkVankor}" Offset="0.75" />
+            <GradientStop Color="{StaticResource YellowVankor}" Offset="1" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
