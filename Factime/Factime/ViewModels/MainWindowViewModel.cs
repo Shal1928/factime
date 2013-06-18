@@ -15,6 +15,7 @@ namespace Factime.ViewModels
     {
         public MainWindowViewModel()
         {
+            _selectedMonth = DateTime.Now.Month;
             var weekCollection = new List<WeekWrapper>();
             
             for (var i = 1; i <= 12; i++)
@@ -102,7 +103,7 @@ namespace Factime.ViewModels
         //    }
         //}
 
-        private int _selectedMonth = 6;
+        private int _selectedMonth;
         public int SelectedMonth
         {
             get
@@ -113,6 +114,7 @@ namespace Factime.ViewModels
             {
                 _selectedMonth = value;
                 OnPropertyChanged(() => SelectedMonth);
+                UpdateFilterWeekCollections();
             }
         }
 
@@ -133,6 +135,15 @@ namespace Factime.ViewModels
         private void UpdateWeekCollections(List<WeekWrapper> weekCollection)
         {
             var view = CollectionViewSource.GetDefaultView(weekCollection);
+            if (view == null) return;
+            view.Filter = FilterPredicate;
+
+            WeekCollection = view;
+        }
+
+        private void UpdateFilterWeekCollections()
+        {
+            var view = CollectionViewSource.GetDefaultView(WeekCollection);
             if (view == null) return;
             view.Filter = FilterPredicate;
 
