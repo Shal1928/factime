@@ -77,6 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\GridMouseOverBehavior.cs" />
     <Compile Include="Behaviors\RadiobuttonPreviewEventBehavior.cs" />
     <Compile Include="Controls\CalendarDayChecker.cs" />
     <Compile Include="Controls\DataGridTemplateColumnExt.cs" />
