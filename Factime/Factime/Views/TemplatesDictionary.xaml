@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF"
-                    xmlns:Models="clr-namespace:Factime.Models">
+                    xmlns:Models="clr-namespace:Factime.Models" xmlns:Converters="clr-namespace:Factime.Converters">
     
     <!-- Content for the template (note: not a template itself) -->
     <Border x:Shared="False" x:Key="Foo" BorderBrush="Red" BorderThickness="1" CornerRadius="4">
@@ -49,7 +49,7 @@
         <Setter Property="Text" Value="{Binding Date, StringFormat=dd}" />
         
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}">
+            <!--<DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}">
                 <Setter Property="Foreground" Value="#88000000" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}">
@@ -57,7 +57,104 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}">
                 <Setter Property="Foreground" Value="#ffFF6B40" />
-            </DataTrigger>
+            </DataTrigger>-->
+
+            <!--Holiday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#ffFF6B40" />
+            </MultiDataTrigger>
+            
+            <!--PreHoliday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#ff086CA2" />
+            </MultiDataTrigger>
+
+            <!--Workday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#88000000" />
+            </MultiDataTrigger>
+
+
+            <!--Holiday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#88FF6B40" />
+            </MultiDataTrigger>
+
+            <!--PreHoliday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#88086CA2" />
+            </MultiDataTrigger>
+
+            <!--Workday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="#44000000" />
+            </MultiDataTrigger>
         </Style.Triggers>
     </Style>
 

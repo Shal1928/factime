@@ -51,7 +51,7 @@
 
         public int CurrentMonth
         {
-            get; 
+            get;
             set;
         }
     }
