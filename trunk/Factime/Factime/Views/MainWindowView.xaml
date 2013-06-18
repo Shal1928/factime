@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM"
-               xmlns:Controls="clr-namespace:Factime.Controls"
-               xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF" Title="Factime" 
-        Width="790" Height="500">
+        xmlns:Controls="clr-namespace:Factime.Controls" 
+        Title="Factime" 
+        Width="826" Height="500">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -33,7 +33,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding WeekCollection}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" >
             <DataGrid.Columns>
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Tuesday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вт" Width="SizeToCells" IsReadOnly="True" />
@@ -42,7 +42,6 @@
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Friday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Пт" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Saturday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Сб" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridCellTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
-                <!--<DataGridTextColumn CellStyle="{DynamicResource SimplyCellStyle}" Header="Image" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Monday.Date}" />-->
             </DataGrid.Columns>
 
 

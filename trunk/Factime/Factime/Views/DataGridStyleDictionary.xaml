@@ -16,22 +16,25 @@
         <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeader}"/>
         <Setter Property="CellStyle" Value="{DynamicResource SimplyCellStyle}"/>
         <Setter Property="ItemContainerStyle" Value="{DynamicResource ItemStyle}"/>
-        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource LightGraySolidBrush}"/>
-
+        
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalGridLinesBrush" Value="Transparent"/>
-
+        <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+        
         <Setter Property="AutoGenerateColumns" Value="False" />
-        <Setter Property="AlternationCount" Value="2"/>
 
-        <Setter Property="HeadersVisibility" Value="All"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="GridLinesVisibility" Value="Vertical"/>
 
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="SelectionUnit" Value="Cell"/>
         <Setter Property="ClipboardCopyMode" Value="IncludeHeader"/>
-
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
     </Style>
 
 
@@ -46,10 +49,10 @@
 
         <Setter Property="Margin" Value="0,1,0,1"/>
         <Setter Property="FontFamily" Value="Verdana" />
-        <Setter Property="Cursor" Value="Hand" />
+        <!--<Setter Property="Cursor" Value="Hand" />-->
         <Setter Property="Background" Value="Transparent" />
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="AlternationIndex" Value="0">
                 <Setter Property="Background" Value="#ffFFFFFF"/>
             </Trigger>
@@ -62,7 +65,7 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource LightBlueSolidBrush}" />
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
 
     </Style>
 
@@ -76,16 +79,19 @@
 
     <Style x:Key="SimplyCellStyle" TargetType="{x:Type DataGridCell}">
 
-        <Setter Property="Template" Value="{DynamicResource DefaultDataGridCellTemplate}" />
+        <!--<Setter Property="Template" Value="{DynamicResource DefaultDataGridCellTemplate}" />-->
 
-        <Setter Property="TextBlock.FontFamily" Value="Verdana" />
-        <Setter Property="TextBlock.FontSize" Value="12"/>
+        <!--<Setter Property="TextBlock.FontFamily" Value="Verdana" />
+        <Setter Property="TextBlock.FontSize" Value="12"/>-->
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Height" Value="Auto"/>
 
         <Style.Triggers>
-            <Trigger Property="DataGridCell.IsSelected" Value="True">
+            <!--<Trigger Property="DataGridCell.IsSelected" Value="True">
                 <Setter Property="Template" Value="{DynamicResource AddValueCellEditingTemplate}" />
+            </Trigger>-->
+            <Trigger Property="DataGridCell.IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MouseOverGradientBrush}" />
             </Trigger>
         </Style.Triggers>
 
@@ -102,13 +108,14 @@
     <Style x:Key="ColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
 
         <Setter Property="Template" Value="{DynamicResource DefaultDataGridColumnHeader}" />
-
-        <Setter Property="VerticalContentAlignment" Value="Bottom" />
+        
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Foreground" Value="#cc000000" />
-        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Height" Value="24" />
         <Setter Property="FontFamily" Value="Verdana" />
-        <Setter Property="FontSize" Value="10" />
-
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="DemiBold" />
+        <Setter Property="SeparatorVisibility" Value="Collapsed" />
     </Style>
 
 
