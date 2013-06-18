@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Factime.Controls.MonthSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Converters="clr-namespace:Factime.Converters" mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="380">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views\StylesDictionary.xaml" />
+                <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <RadioButton Content="Янв" GroupName="Monthes" IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=1}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="0" />
+        <RadioButton Content="Фев" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=2}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="1" />
+        <RadioButton Content="Март" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=3}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="2" />
+
+        <RadioButton Content="Апр" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=4}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="3" />
+        <RadioButton Content="Май" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=5}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="4" />
+        <RadioButton Content="Июнь" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=6}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="5" />
+
+        <RadioButton Content="Июль" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=7}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="6" />
+        <RadioButton Content="Авг" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=8}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="7" />
+        <RadioButton Content="Сен" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=9}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="8" />
+
+        <RadioButton Content="Окт" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=10}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="9" />
+        <RadioButton Content="Ноя" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=11}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="10" />
+        <RadioButton Content="Дек" GroupName="Monthes"  IsChecked="{Binding SelectedMonth, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={Converters:MonthToBoolConverter}, ConverterParameter=12}" Style="{DynamicResource MonthRadioButtonStyle}" Grid.Column="11" />
+
+    </Grid>
+</UserControl>

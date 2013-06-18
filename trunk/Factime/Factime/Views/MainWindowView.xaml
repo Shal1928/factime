@@ -4,7 +4,9 @@
         xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM"
         xmlns:Controls="clr-namespace:Factime.Controls" 
         Title="Factime" 
-        Width="826" Height="500">
+        MinWidth="695" MaxWidth="695"
+        MinHeight="500"
+        Width="695" Height="500">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -32,7 +34,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" >
+        <Controls:MonthSelector SelectedMonth="{Binding SelectedMonth, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+        
+        <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" >
             <DataGrid.Columns>
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Tuesday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Вт" Width="SizeToCells" IsReadOnly="True" />
@@ -42,9 +46,12 @@
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Saturday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Сб" Width="SizeToCells" IsReadOnly="True" />
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
             </DataGrid.Columns>
-            <!--CellTemplate="{StaticResource DefaultDataGridDataTemplate}"-->
 
         </DataGrid>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2">
+            <TextBlock Text="" />
+        </StackPanel>
         
     </Grid>
 </Base:ViewBase>
