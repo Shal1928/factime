@@ -35,13 +35,14 @@
 
     <!--***   Base RadioButtonPresenterStyle ***-->
     <Style x:Key="RadioButtonPresenter" TargetType="{x:Type RadioButton}">
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="#55000000" />
         <Setter Property="Visibility" Value="Hidden" />
-
+        <Setter Property="FontFamily" Value="Verdana" />
+        
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template" Value="{DynamicResource LinkRadioButton}" />
-        
+
         <Setter Property="Grid.Column" Value="1" />
 
         <Style.Triggers>
@@ -59,22 +60,22 @@
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Holiday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
         <Setter Property="Content" Value="Вых." />
-        <Setter Property="Margin" Value="5,5,5,0" />
+        <Setter Property="Margin" Value="5,5,5,3" />
         <Setter Property="Grid.Row" Value="0" />
     </Style>
     <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.PreHoliday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
+        <Setter Property="Width" Value="32" />
         <Setter Property="Content" Value="Пред." />
         <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Grid.Row" Value="1" />
-        <!--<Setter Property="Foreground" Value="Red" />-->
     </Style>
     <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Workday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
         <Setter Property="Content" Value="Раб." />
-        <Setter Property="Margin" Value="5,0,5,5" />
+        <Setter Property="Margin" Value="5,3,5,5" />
         <Setter Property="Grid.Row" Value="2" />
     </Style>
 
