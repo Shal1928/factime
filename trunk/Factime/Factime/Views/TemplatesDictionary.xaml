@@ -72,13 +72,13 @@
 
     
     <ControlTemplate x:Key="LinkRadioButton" TargetType="{x:Type RadioButton}">
-        <TextBlock TextDecorations="Underline" FontFamily="Verdana">
+        <TextBlock TextDecorations="Underline">
             <ContentPresenter />
         </TextBlock>
     </ControlTemplate>
 
     <ControlTemplate x:Key="CheckedLinkRadioButton" TargetType="{x:Type RadioButton}">
-        <TextBlock FontFamily="Verdana" FontWeight="DemiBold">
+        <TextBlock FontWeight="SemiBold"  Margin="0,1,0,0">
             <ContentPresenter />
         </TextBlock>
     </ControlTemplate>
