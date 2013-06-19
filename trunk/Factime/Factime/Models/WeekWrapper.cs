@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Factime.Models
 {
@@ -88,6 +89,61 @@ namespace Factime.Models
                    hashFriday ^
                    hashSaturday ^
                    hashSunday;
+        }
+
+        public List<CalendarDay> GetHolidays()
+        {
+            return GetDaysByType(DayType.Holiday);
+        }
+
+        public List<CalendarDay> GetPreholidays()
+        {
+            return GetDaysByType(DayType.PreHoliday);
+        }
+
+        public List<CalendarDay> GetWorkdays()
+        {
+            return GetDaysByType(DayType.Workday);
+        }
+
+        private List<CalendarDay> GetDaysByType(DayType dayType)
+        {
+            var days = new List<CalendarDay>();
+
+            if (Monday.Type == dayType) days.Add(Monday);
+            if (Tuesday.Type == dayType) days.Add(Tuesday);
+            if (Wednesday.Type == dayType) days.Add(Wednesday);
+            if (Thursday.Type == dayType) days.Add(Thursday);
+            if (Friday.Type == dayType) days.Add(Friday);
+
+            if (Saturday.Type == dayType) days.Add(Saturday);
+            if (Sunday.Type == dayType) days.Add(Sunday);
+
+            return days;
+        }
+
+        public void SetStartTimeForWorkday(TimeSpan time)
+        {
+            foreach (var work in GetWorkdays())
+                work.Start = time;
+        }
+
+        public void SetEndTimeForWorkday(TimeSpan time)
+        {
+            foreach (var work in GetWorkdays())
+                work.End = time;
+        }
+
+        public void SetStartTimeForPreholiday(TimeSpan time)
+        {
+            foreach (var work in GetPreholidays())
+                work.Start = time;
+        }
+
+        public void SetEndTimeForPreholiday(TimeSpan time)
+        {
+            foreach (var work in GetPreholidays())
+                work.End = time;
         }
     }
 }

@@ -57,10 +57,17 @@ namespace TestConsoleApplication
             var distinctCollection = listNums2.GroupBy(x => x.Value).Select(y => y.First());
 
 
-            foreach (var intWrap in distinctCollection)
-            {
-                Console.WriteLine(intWrap.Value);
-            }
+            //foreach (var intWrap in distinctCollection)
+            //{
+            //    Console.WriteLine(intWrap.Value);
+            //}
+
+            var stringValue = "1245";
+            var timeSpanValue = new TimeSpan(12, 46, 00);
+            var time = TimeSpan.Parse(stringValue);
+
+            Console.WriteLine("From string: {0}", time);
+            Console.WriteLine("To string: {0}", timeSpanValue.ToString().Remove(3));
 
             Console.ReadLine();
         }

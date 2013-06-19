@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM"
-        xmlns:Controls="clr-namespace:Factime.Controls" 
-        Title="Factime" 
+        xmlns:Controls="clr-namespace:Factime.Controls" xmlns:Converters="clr-namespace:Factime.Converters"
+               Title="Factime" 
         MinWidth="695" MaxWidth="695"
         MinHeight="500"
         Width="695" Height="500">
@@ -57,11 +57,11 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Margin="5">
                     <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Width="50" BorderBrush="Transparent" />
+                    <TextBox Text="{Binding WorkdayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="5">
                     <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Width="50" BorderBrush="Transparent" />
+                    <TextBox Text="{Binding WorkdayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -72,11 +72,11 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Margin="5">
                     <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Width="50" BorderBrush="Transparent" />
+                    <TextBox Text="{Binding PreholidayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="5">
                     <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Width="50" BorderBrush="Transparent" />
+                    <TextBox Text="{Binding PreholidayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

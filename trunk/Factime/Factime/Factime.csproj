@@ -95,6 +95,7 @@
     <Compile Include="Converters\DayTypeToBoolConverter.cs" />
     <Compile Include="Converters\ExtractMonthConverter.cs" />
     <Compile Include="Converters\MonthToBoolConverter.cs" />
+    <Compile Include="Converters\StringToTimeSpanConverter.cs" />
     <Compile Include="Models\CalendarDay.cs" />
     <Compile Include="Models\CalendarDayBase.cs" />
     <Compile Include="Models\DayType.cs" />
