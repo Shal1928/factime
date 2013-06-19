@@ -37,7 +37,6 @@
     <Style x:Key="RadioButtonPresenter" TargetType="{x:Type RadioButton}">
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Foreground" Value="#55000000" />
-        <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="FontFamily" Value="Verdana" />
         
         <Setter Property="Cursor" Value="Hand" />
@@ -59,13 +58,22 @@
     <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Holiday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
+        <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Content" Value="Вых." />
         <Setter Property="Margin" Value="5,5,5,3" />
         <Setter Property="Grid.Row" Value="0" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsStateHoliday}" Value="True">
+                <Setter Property="IsChecked" Value="True" />
+            </DataTrigger>
+        </Style.Triggers>
+        
     </Style>
     <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.PreHoliday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
+        <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Width" Value="32" />
         <Setter Property="Content" Value="Пред." />
         <Setter Property="Margin" Value="5,0,5,0" />
@@ -74,18 +82,81 @@
     <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Workday}, Converter={Converters:DayTypeToBoolConverter}}" />
 
+        <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Content" Value="Раб." />
         <Setter Property="Margin" Value="5,3,5,5" />
         <Setter Property="Grid.Row" Value="2" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsStateHoliday}" Value="False">
+                <Setter Property="IsChecked" Value="True" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
     
     <Style x:Key="MonthRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
 
-        <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Margin" Value="5" />
     </Style>
 
+    
+    
+    
+    
+    <!--*******************-->
+    <!--*                 *-->
+    <!--*   ToggleButton  *-->
+    <!--*                 *-->
+    <!--*********V*********-->
+    
+    <Style x:Key="DateToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template" Value="{DynamicResource DateToggleButtonTemplate}" />
+        
+        <Style.Triggers>           
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template" Value="{DynamicResource MouseOverDateToggleButtonTemplate}" />
+            </Trigger>           
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Template" Value="{DynamicResource CheckedDateToggleButtonTemplate}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
+    
+    
+    
+    
+    <!--**************-->
+    <!--*            *-->
+    <!--*   Ellipse  *-->
+    <!--*            *-->
+    <!--*******V******-->
+
+    <Style x:Key="EllipseMarkerStyle" TargetType="{x:Type Ellipse}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+
+        <Setter Property="Stroke" Value="#88FF6B40" />
+        <Setter Property="StrokeThickness" Value="5" />
+        <Setter Property="Fill" Value="Transparent" />
+    </Style>
+
+    <!--<Style x:Key="EllipseMarkerStyle" TargetType="{x:Type Ellipse}" BasedOn="{StaticResource EllipseStyleBase}">
+        <Setter Property="Stroke" Value="White" />
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Stroke" Value="#88FF6B40" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Stroke" Value="Transparent" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
+
+    <Style x:Key="EllipseMarkedStyle" TargetType="{x:Type Ellipse}" BasedOn="{StaticResource EllipseMarkerStyle}">
+        <Setter Property="Stroke" Value="#ffFF6B40" />
+    </Style>
 
 
     <!--****************-->
@@ -104,9 +175,9 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="5" />
 
-        <Setter Property="Grid.Column" Value="0" />
+        <!--<Setter Property="Grid.Column" Value="0" />
         <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Grid.RowSpan" Value="3" />
+        <Setter Property="Grid.RowSpan" Value="3" />-->
     </Style>
 
     <Style x:Key="TextPresenter" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextPresenterBase}">

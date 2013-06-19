@@ -142,6 +142,20 @@ namespace Factime.ViewModels
             }
         }
 
+        private bool _selectStateHoliday;
+        public bool SelectStateHoliday
+        {
+            get
+            {
+                return _selectStateHoliday;
+            }
+            set
+            {
+                _selectStateHoliday = value;
+                OnPropertyChanged(() => SelectStateHoliday);
+            }
+        }
+
         #region Start & End Time Properties
 
         public TimeSpan WorkdayStartTime

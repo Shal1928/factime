@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Behaviors="clr-namespace:Factime.Behaviors"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:Converters="clr-namespace:UseAbilities.WPF.Converters;assembly=UseAbilities.WPF">
 
     <!--<x:Array x:Key="ConverterParametrForHoliday" Type="{x:Type Models:DayType}">
         <x:Static Member="Models:DayType.Workday" />
@@ -19,7 +20,7 @@
     <DataTemplate x:Key="DefaultDataGridDataTemplate">
         <Grid Style="{DynamicResource DefaultGridCellTemplate}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -33,21 +34,53 @@
             </i:Interaction.Behaviors>
             
             <Border Background="Transparent" BorderBrush="Transparent" 
-                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" />
             
-            <TextBlock Style="{DynamicResource TextPresenter}" />
+            <!--<TextBlock Style="{DynamicResource TextPresenter}" />-->
 
+            <ToggleButton Style="{DynamicResource DateToggleButton}" IsChecked="{Binding IsStateHoliday, Mode=TwoWay}"
+                          IsEnabled="{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                          Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
+            
             <RadioButton Style="{DynamicResource HolydayRadioButtonPresenter}" />
             <RadioButton Style="{DynamicResource PreHolidayRadioButtonPresenter}" />
             <RadioButton Style="{DynamicResource WorkdayRadioButtonPresenter}" />
 
+            <!--<ToggleButton Content="Гос. праздник" Style="{DynamicResource RadioButtonPresenter}" IsChecked="{Binding IsStateHoliday, Mode=TwoWay}"
+                          Visibility="{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Converter={Converters:BoolToVisibilityConverter}, ConverterParameter=Collapse}"
+                          Grid.Column="0" Grid.Row="2" />-->
+
         </Grid>
     </DataTemplate>
 
-    
-    
-    
-    
+    <ControlTemplate x:Key="DateToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <TextBlock Style="{DynamicResource TextPresenter}">
+                <ContentPresenter />
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="MouseOverDateToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Ellipse Style="{DynamicResource EllipseMarkerStyle}" />
+            <TextBlock Style="{DynamicResource TextPresenter}">
+                <ContentPresenter />
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CheckedDateToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Ellipse Style="{DynamicResource EllipseMarkedStyle}" />
+
+            <TextBlock Style="{DynamicResource TextPresenter}">
+                <ContentPresenter />
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+
     <!--***********************************-->
     <!--*                                 *-->
     <!--*   DefaultDataGridColumnHeader   *-->

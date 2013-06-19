@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 using UseAbilities.WPF.Converters.Base;
 
 namespace Factime.Converters
@@ -31,7 +32,7 @@ namespace Factime.Converters
             int.TryParse((string)parameter, out parametrValue);
 
             if ((bool)value) return parametrValue;
-            return DependencyProperty.UnsetValue;
+            return Binding.DoNothing; //DependencyProperty.UnsetValue;
         }
     }
 }

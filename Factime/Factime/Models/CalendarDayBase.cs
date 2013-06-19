@@ -22,5 +22,19 @@ namespace Factime.Models
             get; 
             set;
         }
+
+        private bool _isStateHoliday;
+        public virtual bool IsStateHoliday
+        {
+            get 
+            {
+                return _isStateHoliday;
+            }
+            set
+            {
+                _isStateHoliday = value;
+                Type = value ? DayType.Holiday : DayType.Workday;
+            }
+        }
     }
 }

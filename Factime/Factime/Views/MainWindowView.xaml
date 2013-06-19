@@ -6,7 +6,7 @@
                Title="Factime" 
         MinWidth="695" MaxWidth="695"
         MinHeight="500"
-        Width="695" Height="500">
+        Width="695" Height="550">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -83,6 +83,9 @@
 
         <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150"
                 Grid.Column="3" Grid.Row="2" />
+
+        <CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
+                  Grid.Column="4" Grid.Row="2" />
 
     </Grid>
 </Base:ViewBase>
