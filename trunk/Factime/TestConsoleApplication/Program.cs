@@ -43,8 +43,24 @@ namespace TestConsoleApplication
                        .Take(5)
                        .Select(g => g.Key);
 
-            Console.WriteLine(nums.GetFrequentlyValues(1).FirstOrDefault());
-            Console.WriteLine(DateTime.Now.Month);
+            //8 4 2 7
+            IEnumerable<IntWrap> listNums2 = new List<IntWrap>
+                                {
+                                    new IntWrap(8),
+                                    new IntWrap(4),
+                                    new IntWrap(2),
+                                    new IntWrap(2),
+                                    new IntWrap(4),
+                                    new IntWrap(7),
+                                    new IntWrap(4),
+                                };
+            var distinctCollection = listNums2.GroupBy(x => x.Value).Select(y => y.First());
+
+
+            foreach (var intWrap in distinctCollection)
+            {
+                Console.WriteLine(intWrap.Value);
+            }
 
             Console.ReadLine();
         }

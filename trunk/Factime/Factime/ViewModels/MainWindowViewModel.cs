@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,7 +27,9 @@ namespace Factime.ViewModels
                 weekCollection.AddRange(weeks.Select(week => WrapCalendarDays(week, i)));
             }
 
-            UpdateWeekCollections(weekCollection);
+            var distincWeekCollection = weekCollection.Distinct().ToList();
+
+            UpdateWeekCollections(distincWeekCollection);
         }
 
         private static WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
@@ -143,11 +146,7 @@ namespace Factime.ViewModels
 
         private void UpdateFilterWeekCollections()
         {
-            var view = CollectionViewSource.GetDefaultView(WeekCollection);
-            if (view == null) return;
-            view.Filter = FilterPredicate;
-
-            WeekCollection = view;
+            WeekCollection.Filter = FilterPredicate;
         }
 
         
