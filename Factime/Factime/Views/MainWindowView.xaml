@@ -81,6 +81,8 @@
             </StackPanel>
         </StackPanel>
 
+        <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150"
+                Grid.Column="3" Grid.Row="2" />
 
     </Grid>
 </Base:ViewBase>
