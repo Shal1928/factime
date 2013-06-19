@@ -16,7 +16,7 @@ namespace Factime.ViewModels
     {
         public MainWindowViewModel()
         {
-            _selectedMonth = DateTime.Now.Month;
+            _selectedMonth = 8;//DateTime.Now.Month;
             var weekCollection = new List<WeekWrapper>();
             
             for (var i = 1; i <= 12; i++)
@@ -148,8 +148,7 @@ namespace Factime.ViewModels
         {
             WeekCollection.Filter = FilterPredicate;
         }
-
-        
+     
         private bool FilterPredicate(object item)
         {
             var weekWrapper = item as WeekWrapper;
@@ -157,9 +156,7 @@ namespace Factime.ViewModels
 
             var date = new DateTime(DateTime.Now.Year, SelectedMonth, 1);
             var weeks = date.GetWeeksAndDaysOfMonth();
-            var monthes = weeks.Select(week => week.Select(dateTime => dateTime.Month).GetFrequentlyValues(1).FirstOrDefault()).ToList();
-            
-            return monthes.GetFrequentlyValues(1).FirstOrDefault() == weekWrapper.CurrentMonth;
+            return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
         }
     }
 }
