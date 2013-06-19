@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Factime.Models
 {
@@ -89,6 +90,12 @@ namespace Factime.Models
                    hashFriday ^
                    hashSaturday ^
                    hashSunday;
+        }
+
+        public List<CalendarDay> GetStateHolidays()
+        {
+            var holidays = GetDaysByType(DayType.Holiday);
+            return holidays.Where(calendarDay => calendarDay.IsStateHoliday).ToList();
         }
 
         public List<CalendarDay> GetHolidays()
