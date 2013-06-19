@@ -5,10 +5,15 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Input;
 using Factime.Models;
+using Factime.Stores;
 using UseAbilities.Extensions.DateTimeExt;
 using UseAbilities.Extensions.EnumerableExt;
+using UseAbilities.IoC.Attributes;
+using UseAbilities.IoC.Stores;
 using UseAbilities.MVVM.Base;
+using UseAbilities.MVVM.Command;
 
 namespace Factime.ViewModels
 {
@@ -106,6 +111,22 @@ namespace Factime.ViewModels
         //    }
         //}
 
+        [InjectedProperty]
+        public IXmlStore<FactimeSettings> FactimeSettingsStore
+        {
+            get; 
+            set;
+        }
+
+        private FactimeSettings _factimeSettings;
+        public FactimeSettings FactimeSettings
+        {
+            get
+            {
+                return _factimeSettings ?? (_factimeSettings = FactimeSettingsStore.Load());
+            }
+        }
+
         private int _selectedMonth;
         public int SelectedMonth
         {
@@ -123,63 +144,59 @@ namespace Factime.ViewModels
 
         #region Start & End Time Properties
 
-        private TimeSpan _workdayStartTime;
         public TimeSpan WorkdayStartTime
         {
             get
             {
-                return _workdayStartTime;
+                return FactimeSettings.DefaultStart;
             }
             set
             {
-                _workdayStartTime = value;
+                FactimeSettings.DefaultStart = value;
                 OnPropertyChanged(() => WorkdayStartTime);
-                UpdateWorkTime(DayType.Workday, _workdayStartTime, true);
+                UpdateWorkTime(DayType.Workday, value, true);
             }
         }
 
-        private TimeSpan _workdayEndTime;
         public TimeSpan WorkdayEndTime
         {
             get
             {
-                return _workdayEndTime;
+                return FactimeSettings.DefaultEnd;
             }
             set
             {
-                _workdayEndTime = value;
+                FactimeSettings.DefaultEnd = value;
                 OnPropertyChanged(() => WorkdayEndTime);
-                UpdateWorkTime(DayType.Workday, _workdayStartTime, false);
+                UpdateWorkTime(DayType.Workday, value, false);
             }
         }
 
-        private TimeSpan _preholidayStartTime;
         public TimeSpan PreholidayStartTime
         {
             get
             {
-                return _preholidayStartTime;
+                return FactimeSettings.ShortStart;
             }
             set
             {
-                _preholidayStartTime = value;
+                FactimeSettings.ShortStart = value;
                 OnPropertyChanged(() => PreholidayStartTime);
-                UpdateWorkTime(DayType.PreHoliday, _workdayStartTime, true);
+                UpdateWorkTime(DayType.PreHoliday, value, true);
             }
         }
 
-        private TimeSpan _preholidayEndTime;
         public TimeSpan PreholidayEndTime
         {
             get
             {
-                return _preholidayEndTime;
+                return FactimeSettings.ShortEnd;
             }
             set
             {
-                _preholidayEndTime = value;
+                FactimeSettings.ShortEnd = value;
                 OnPropertyChanged(() => PreholidayEndTime);
-                UpdateWorkTime(DayType.PreHoliday, _workdayStartTime, false);
+                UpdateWorkTime(DayType.PreHoliday, value, false);
             }
         }
 
@@ -252,5 +269,25 @@ namespace Factime.ViewModels
             var weeks = date.GetWeeksAndDaysOfMonth();
             return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
         }
+
+        #region Commands
+
+        private ICommand _saveSettingsCommand;
+        public ICommand SaveSettingsCommand
+        {
+            get
+            {
+                return _saveSettingsCommand ?? (_saveSettingsCommand = new RelayCommand(param => OnSaveSettingsCommand(), null));
+            }
+        }
+
+        private void OnSaveSettingsCommand()
+        {
+            FactimeSettingsStore.Save(FactimeSettings);
+        }
+
+        #endregion
+
+        
     }
 }

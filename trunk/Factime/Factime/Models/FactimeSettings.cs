@@ -22,6 +22,13 @@ namespace Factime.Models
         }
 
         [DataMember]
+        public TimeSpan ShortStart
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public TimeSpan ShortEnd
         {
             get;
