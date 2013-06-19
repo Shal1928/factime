@@ -16,7 +16,7 @@ namespace Factime.ViewModels
     {
         public MainWindowViewModel()
         {
-            _selectedMonth = 8;//DateTime.Now.Month;
+            _selectedMonth = DateTime.Now.Month;
             var weekCollection = new List<WeekWrapper>();
             
             for (var i = 1; i <= 12; i++)
