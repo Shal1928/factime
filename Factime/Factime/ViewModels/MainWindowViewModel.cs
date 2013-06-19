@@ -121,6 +121,70 @@ namespace Factime.ViewModels
             }
         }
 
+        #region Start & End Time Properties
+
+        private TimeSpan _workdayStartTime;
+        public TimeSpan WorkdayStartTime
+        {
+            get
+            {
+                return _workdayStartTime;
+            }
+            set
+            {
+                _workdayStartTime = value;
+                OnPropertyChanged(() => WorkdayStartTime);
+                UpdateWorkTime(DayType.Workday, _workdayStartTime, true);
+            }
+        }
+
+        private TimeSpan _workdayEndTime;
+        public TimeSpan WorkdayEndTime
+        {
+            get
+            {
+                return _workdayEndTime;
+            }
+            set
+            {
+                _workdayEndTime = value;
+                OnPropertyChanged(() => WorkdayEndTime);
+                UpdateWorkTime(DayType.Workday, _workdayStartTime, false);
+            }
+        }
+
+        private TimeSpan _preholidayStartTime;
+        public TimeSpan PreholidayStartTime
+        {
+            get
+            {
+                return _preholidayStartTime;
+            }
+            set
+            {
+                _preholidayStartTime = value;
+                OnPropertyChanged(() => PreholidayStartTime);
+                UpdateWorkTime(DayType.PreHoliday, _workdayStartTime, true);
+            }
+        }
+
+        private TimeSpan _preholidayEndTime;
+        public TimeSpan PreholidayEndTime
+        {
+            get
+            {
+                return _preholidayEndTime;
+            }
+            set
+            {
+                _preholidayEndTime = value;
+                OnPropertyChanged(() => PreholidayEndTime);
+                UpdateWorkTime(DayType.PreHoliday, _workdayStartTime, false);
+            }
+        }
+
+        #endregion
+
         private ICollectionView _weekCollection;
         public ICollectionView WeekCollection
         {
@@ -132,6 +196,36 @@ namespace Factime.ViewModels
             {
                 _weekCollection = value;
                 OnPropertyChanged(() => WeekCollection);
+            }
+        }
+
+        private void UpdateWorkTime(DayType dayType, TimeSpan time, bool isStartTime)
+        {
+            //Update StartTime
+            if(isStartTime)
+            {
+                //Update Workday
+                if(dayType == DayType.Workday)
+                    foreach (WeekWrapper weekWrapper in WeekCollection)
+                        weekWrapper.SetStartTimeForWorkday(time);
+
+                //Update PreHoliday
+                else
+                    foreach (WeekWrapper weekWrapper in WeekCollection)
+                        weekWrapper.SetStartTimeForPreholiday(time);
+            }
+            //Update EndTime
+            else
+            {
+                //Update Workday
+                if (dayType == DayType.Workday)
+                    foreach (WeekWrapper weekWrapper in WeekCollection)
+                        weekWrapper.SetEndTimeForWorkday(time);
+
+                //Update PreHoliday
+                else
+                    foreach (WeekWrapper weekWrapper in WeekCollection)
+                        weekWrapper.SetEndTimeForPreholiday(time);
             }
         }
 
