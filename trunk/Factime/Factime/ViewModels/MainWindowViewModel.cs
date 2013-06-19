@@ -297,6 +297,7 @@ namespace Factime.ViewModels
 
         private void OnSaveSettingsCommand()
         {
+            //Make saving only Date and Month or loading only Date and Month
             foreach (WeekWrapper week in WeekCollection)
                 FactimeSettings.DefaultHolidaysCollection.AddRange(week.GetStateHolidays().Select(day=> day.Date));
             
