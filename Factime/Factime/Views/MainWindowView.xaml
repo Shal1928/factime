@@ -34,7 +34,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Controls:MonthSelector SelectedMonth="{Binding SelectedMonth, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+        <Controls:MonthSelector SelectedMonth="{Binding SelectedMonth, Mode=TwoWay}" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
         
         <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" >
             <DataGrid.Columns>
@@ -48,10 +50,37 @@
             </DataGrid.Columns>
 
         </DataGrid>
-
-        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="2">
-            <TextBlock Text="" />
+     
+        <Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="0" Grid.Row="2" />
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0" Grid.Row="2">
+            <TextBlock Text="Стандартный раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
+                    <TextBox Width="50" BorderBrush="Transparent" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
+                    <TextBox Width="50" BorderBrush="Transparent" />
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
-        
+
+        <Border Background="{DynamicResource PreHolidayGradientBrush}" Grid.Column="1" Grid.Row="2" />
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="2">
+            <TextBlock Text="Предпраздн. раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
+                    <TextBox Width="50" BorderBrush="Transparent" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
+                    <TextBox Width="50" BorderBrush="Transparent" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+
     </Grid>
 </Base:ViewBase>

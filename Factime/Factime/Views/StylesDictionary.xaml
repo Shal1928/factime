@@ -313,9 +313,12 @@
 
 
 
-
+    <Color x:Key="PreHolidayColor">#ff086CA2</Color>
+    <Color x:Key="PreHolidayHalfColor">#88086CA2</Color>
+    <Color x:Key="PreHolidayQuartColor">#33086CA2</Color>
+    
     <Color x:Key="LightBlueVankor">#ffC3CBE5</Color>
-    <Color x:Key="BlueVankor">#ff6D85D4</Color>
+    
     <Color x:Key="DarkBlueVankor">#ff233B8A</Color>
 
     <Color x:Key="YellowVankor">#ffFAD500</Color>
@@ -342,6 +345,14 @@
     <SolidColorBrush x:Key="LinkOverSolidBrush" Color="#ff000000" />
     <SolidColorBrush x:Key="LightGraySolidBrush" Color="{StaticResource LightGrayVankor}" />
     <SolidColorBrush x:Key="VeryLightGrayVankorSolidBrush" Color="{StaticResource VeryLightGrayVankor}" />
+
+    <SolidColorBrush x:Key="PreHolidayColorSolidBrush" Color="{StaticResource PreHolidayColor}" />
+
+    <LinearGradientBrush x:Key="PreHolidayGradientBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource PreHolidayQuartColor}" Offset="0"/>
+        <GradientStop Color="{StaticResource PreHolidayHalfColor}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource PreHolidayColor}" Offset="1"/>
+    </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="MouseOverGradientBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
