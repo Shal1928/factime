@@ -37,13 +37,13 @@ namespace Factime.ViewModels
             UpdateWeekCollections(distincWeekCollection);
         }
 
-        private static WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
+        private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
         {
             var weekWrapper = new WeekWrapper(currentMonth);
 
             var startTime = new TimeSpan(9, 00, 00);
             var endTime = new TimeSpan(18, 30, 00);
-            
+
             weekWrapper.Monday = new CalendarDay
             {
                 Date = week[0],
@@ -297,8 +297,27 @@ namespace Factime.ViewModels
 
         private void OnSaveSettingsCommand()
         {
+            foreach (WeekWrapper week in WeekCollection)
+                FactimeSettings.DefaultHolidaysCollection.AddRange(week.GetStateHolidays().Select(day=> day.Date));
+            
             FactimeSettingsStore.Save(FactimeSettings);
         }
+
+        private ICommand _loadedCommand;
+        public ICommand LoadedCommand
+        {
+            get
+            {
+                return _loadedCommand ?? (_loadedCommand = new RelayCommand(param => OnLoadedCommand(), null));
+            }
+        }
+
+        private void OnLoadedCommand()
+        {
+            var stateHolidays = FactimeSettings.DefaultHolidaysCollection;
+        }
+
+        
 
         #endregion
 
