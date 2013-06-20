@@ -35,8 +35,8 @@ namespace Factime
 
         private static void Loader(IoC ioc)
         {
+            ioc.RegisterSingleton<IFileStore<List<CalendarDay>>, CalendarDayStore>();
             ioc.RegisterSingleton<IXmlStore<FactimeSettings>, FactimeSettingsStore>();
-            //ioc.RegisterSingleton<DBStore<Requests>, RequestsDBStore>();
         }
     }
 }

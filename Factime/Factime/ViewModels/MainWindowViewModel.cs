@@ -25,12 +25,12 @@ namespace Factime.ViewModels
             
         }
 
-        private static WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
+        private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
         {
             var weekWrapper = new WeekWrapper(currentMonth);
 
             var startTime = new TimeSpan(9, 00, 00);
-            var endTime = new TimeSpan(18, 30, 00);
+            var endTime = new TimeSpan(18, 30, 00);          
 
             weekWrapper.Monday = new CalendarDay
             {
@@ -82,6 +82,17 @@ namespace Factime.ViewModels
                 Type = DayType.Holiday
             };
 
+            if (CalendarDayCollection!=null)
+            {
+                foreach (var calendarDay in CalendarDayCollection)
+                {
+                    foreach (var weekWrap in weekWrapper.GetAllDaysCollection())
+                    {
+                        if (calendarDay.Date.Equals(weekWrap)) weekWrap.Fill(calendarDay);
+                    }
+                }
+            }
+            
             return weekWrapper;
         }
 
@@ -99,6 +110,8 @@ namespace Factime.ViewModels
         //    }
         //}
 
+        #region InjectedProperty
+
         [InjectedProperty]
         public IXmlStore<FactimeSettings> FactimeSettingsStore
         {
@@ -106,12 +119,30 @@ namespace Factime.ViewModels
             set;
         }
 
+        [InjectedProperty]
+        public IFileStore<List<CalendarDay>> CalendarDayStore
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         private FactimeSettings _factimeSettings;
         public FactimeSettings FactimeSettings
         {
             get
             {
                 return _factimeSettings ?? (_factimeSettings = FactimeSettingsStore.Load());
+            }
+        }
+
+        private List<CalendarDay> _calendarDayCollection;
+        public List<CalendarDay> CalendarDayCollection
+        {
+            get
+            {
+                return _calendarDayCollection ?? (_calendarDayCollection = CalendarDayStore.Load());
             }
         }
 
@@ -328,7 +359,34 @@ namespace Factime.ViewModels
             UpdateWeekCollections(distincWeekCollection);
         }
 
-        
+        private ICommand _importCommand;
+        public ICommand ImportCommand
+        {
+            get
+            {
+                return _importCommand ?? (_importCommand = new RelayCommand(param => OnImportCommand(), null));
+            }
+        }
+
+        private void OnImportCommand()
+        {
+
+        }
+
+
+        private ICommand _exportCommand;
+        public ICommand ExportCommand
+        {
+            get
+            {
+                return _exportCommand ?? (_exportCommand = new RelayCommand(param => OnExportCommand(), null));
+            }
+        }
+
+        private void OnExportCommand()
+        {
+
+        }
 
         #endregion
 
