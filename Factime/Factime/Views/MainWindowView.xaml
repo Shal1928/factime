@@ -4,7 +4,7 @@
         xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM"
         xmlns:Controls="clr-namespace:Factime.Controls" 
         xmlns:Converters="clr-namespace:Factime.Converters"
-        Title="Factime" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" Title="Factime" 
         MinWidth="695" MaxWidth="695"
         MinHeight="500"
         Width="695" Height="550">
@@ -18,6 +18,11 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.ColumnDefinitions>

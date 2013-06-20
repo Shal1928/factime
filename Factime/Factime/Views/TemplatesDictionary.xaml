@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Behaviors="clr-namespace:Factime.Behaviors"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:Converters="clr-namespace:UseAbilities.WPF.Converters;assembly=UseAbilities.WPF">
+                    xmlns:Converters="clr-namespace:UseAbilities.WPF.Converters;assembly=UseAbilities.WPF"
+                    xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF">
 
     <!--<x:Array x:Key="ConverterParametrForHoliday" Type="{x:Type Models:DayType}">
         <x:Static Member="Models:DayType.Workday" />
@@ -37,9 +38,9 @@
                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" />
             
             <!--<TextBlock Style="{DynamicResource TextPresenter}" />-->
-
+<!--{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}-->
             <ToggleButton Style="{DynamicResource DateToggleButton}" IsChecked="{Binding IsStateHoliday, Mode=TwoWay}"
-                          IsEnabled="{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                          IsEnabled="True"
                           Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
             
             <RadioButton Style="{DynamicResource HolydayRadioButtonPresenter}" />

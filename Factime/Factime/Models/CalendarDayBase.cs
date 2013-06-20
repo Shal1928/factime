@@ -26,12 +26,14 @@ namespace Factime.Models
         private bool _isStateHoliday;
         public virtual bool IsStateHoliday
         {
-            get 
+            get
             {
+                if (_isStateHoliday) Console.WriteLine(@"get IsStateHoliday = true for: {0}", Date); 
                 return _isStateHoliday;
             }
             set
             {
+                if (value) Console.WriteLine(@"set IsStateHoliday = true for: {0}", Date); 
                 _isStateHoliday = value;
                 Type = value ? DayType.Holiday : DayType.Workday;
             }
