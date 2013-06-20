@@ -152,6 +152,21 @@ namespace Factime.Models
                 foreach (var calendarDay in GetAllDaysCollection())
                     if (calendarDay.Date.Day == stateHolidayDate.Day && calendarDay.Date.Month == stateHolidayDate.Month) calendarDay.IsStateHoliday = true;
             }
+
+            SetPreHolidays();
+        }
+
+        public void SetPreHolidays()
+        {
+            foreach (var calendarDay in GetAllDaysCollection())
+            {
+                if (calendarDay.IsStateHoliday && calendarDay.Date.DayOfWeek != DayOfWeek.Monday)
+                {
+                    var cDay = GetDayByDate(calendarDay.Date.AddDays(-1));
+                    if (cDay.Type != DayType.Holiday) cDay.Type = DayType.PreHoliday;
+                }
+            }
+                
         }
 
         public List<CalendarDay> GetAllDaysCollection()
@@ -159,5 +174,9 @@ namespace Factime.Models
             return new List<CalendarDay> {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
         }
 
+        public CalendarDay GetDayByDate(DateTime date)
+        {
+            return GetAllDaysCollection().Where(cDay => cDay.Date == date).FirstOrDefault();
+        }
     }
 }
