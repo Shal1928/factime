@@ -22,22 +22,10 @@ namespace Factime.ViewModels
         public MainWindowViewModel()
         {
             _selectedMonth = DateTime.Now.Month;
-            var weekCollection = new List<WeekWrapper>();
             
-            for (var i = 1; i <= 12; i++)
-            {
-                var date = new DateTime(DateTime.Now.Year, i, 1);
-                var weeks = date.GetWeeksAndDaysOfMonth();
-
-                weekCollection.AddRange(weeks.Select(week => WrapCalendarDays(week, i)));
-            }
-
-            var distincWeekCollection = weekCollection.Distinct().ToList();
-
-            UpdateWeekCollections(distincWeekCollection);
         }
 
-        private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
+        private static WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
         {
             var weekWrapper = new WeekWrapper(currentMonth);
 
@@ -281,6 +269,7 @@ namespace Factime.ViewModels
 
             var date = new DateTime(DateTime.Now.Year, SelectedMonth, 1);
             var weeks = date.GetWeeksAndDaysOfMonth();
+
             return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
         }
 
@@ -297,11 +286,17 @@ namespace Factime.ViewModels
 
         private void OnSaveSettingsCommand()
         {
-            //Make saving only Date and Month or loading only Date and Month
+            FactimeSettings.DefaultHolidaysCollection.Clear();
+
+            var filter = WeekCollection.Filter;
+            WeekCollection.Filter = null;
+
             foreach (WeekWrapper week in WeekCollection)
                 FactimeSettings.DefaultHolidaysCollection.AddRange(week.GetStateHolidays().Select(day=> day.Date));
             
             FactimeSettingsStore.Save(FactimeSettings);
+
+            WeekCollection.Filter = filter;
         }
 
         private ICommand _loadedCommand;
@@ -315,7 +310,22 @@ namespace Factime.ViewModels
 
         private void OnLoadedCommand()
         {
-            var stateHolidays = FactimeSettings.DefaultHolidaysCollection;
+            var weekCollection = new List<WeekWrapper>();
+
+            for (var i = 1; i <= 12; i++)
+            {
+                var date = new DateTime(DateTime.Now.Year, i, 1);
+                var weeks = date.GetWeeksAndDaysOfMonth();
+
+                weekCollection.AddRange(weeks.Select(week => WrapCalendarDays(week, i)));
+            }
+
+            var distincWeekCollection = weekCollection.Distinct().ToList();
+
+            foreach (var week in distincWeekCollection)
+                week.SetStateHolidays(FactimeSettings.DefaultHolidaysCollection);
+
+            UpdateWeekCollections(distincWeekCollection);
         }
 
         

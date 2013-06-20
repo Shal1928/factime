@@ -64,13 +64,13 @@ namespace Factime.Models
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(this, other)) return true;
 
-            return Monday.Date.Equals(other.Monday.Date) &&
-                   Tuesday.Date.Equals(other.Tuesday.Date) &&
-                   Wednesday.Date.Equals(other.Wednesday.Date) &&
-                   Thursday.Date.Equals(other.Thursday.Date) &&
-                   Friday.Date.Equals(other.Friday.Date) &&
-                   Saturday.Date.Equals(other.Saturday.Date) &&
-                   Sunday.Date.Equals(other.Sunday.Date);
+            return Monday.Date.Equals(other.Monday.Date) && //Monday.IsStateHoliday.Equals(other.Monday.IsStateHoliday) &&
+                   Tuesday.Date.Equals(other.Tuesday.Date) && //Tuesday.IsStateHoliday.Equals(other.Tuesday.IsStateHoliday) &&
+                   Wednesday.Date.Equals(other.Wednesday.Date) && //Wednesday.IsStateHoliday.Equals(other.Wednesday.IsStateHoliday) &&
+                   Thursday.Date.Equals(other.Thursday.Date) && //Thursday.IsStateHoliday.Equals(other.Thursday.IsStateHoliday) &&
+                   Friday.Date.Equals(other.Friday.Date) && //Friday.IsStateHoliday.Equals(other.Friday.IsStateHoliday) &&
+                   Saturday.Date.Equals(other.Saturday.Date) && //Saturday.IsStateHoliday.Equals(other.Saturday.IsStateHoliday) &&
+                   Sunday.Date.Equals(other.Sunday.Date);// && Sunday.IsStateHoliday.Equals(other.Sunday.IsStateHoliday);
         }
 
         public override int GetHashCode()
@@ -116,15 +116,7 @@ namespace Factime.Models
         private List<CalendarDay> GetDaysByType(DayType dayType)
         {
             var days = new List<CalendarDay>();
-
-            if (Monday.Type == dayType) days.Add(Monday);
-            if (Tuesday.Type == dayType) days.Add(Tuesday);
-            if (Wednesday.Type == dayType) days.Add(Wednesday);
-            if (Thursday.Type == dayType) days.Add(Thursday);
-            if (Friday.Type == dayType) days.Add(Friday);
-
-            if (Saturday.Type == dayType) days.Add(Saturday);
-            if (Sunday.Type == dayType) days.Add(Sunday);
+            days.AddRange(GetAllDaysCollection().Where(calendarDay => calendarDay.Type == dayType));
 
             return days;
         }
@@ -152,5 +144,20 @@ namespace Factime.Models
             foreach (var work in GetPreholidays())
                 work.End = time;
         }
+
+        public void SetStateHolidays(List<DateTime> stateHolidaysDateCollection)
+        {
+            foreach (var stateHolidayDate in stateHolidaysDateCollection)
+            {
+                foreach (var calendarDay in GetAllDaysCollection())
+                    if (calendarDay.Date.Day == stateHolidayDate.Day && calendarDay.Date.Month == stateHolidayDate.Month) calendarDay.IsStateHoliday = true;
+            }
+        }
+
+        public List<CalendarDay> GetAllDaysCollection()
+        {
+            return new List<CalendarDay> {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
+        }
+
     }
 }
