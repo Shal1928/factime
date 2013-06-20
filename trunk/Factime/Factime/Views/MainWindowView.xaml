@@ -5,7 +5,7 @@
         xmlns:Controls="clr-namespace:Factime.Controls" 
         xmlns:Converters="clr-namespace:Factime.Converters"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" Title="Factime" 
-        MinWidth="695" MaxWidth="695"
+        MinWidth="729" MaxWidth="729"
         MinHeight="500"
         Width="695" Height="550">
 
