@@ -37,7 +37,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Controls:MonthSelector SelectedMonth="{Binding SelectedMonth, Mode=TwoWay}" 
@@ -56,9 +56,12 @@
             </DataGrid.Columns>
 
         </DataGrid>
-     
-        <Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="0" Grid.Row="2" />
-        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0" Grid.Row="2">
+
+        <!--<Border Background="{DynamicResource DoubleGrayPanelGradientBrush}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" />-->
+
+        <Border Background="{DynamicResource GrayPanelGradientBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="80" Grid.Column="0" Grid.Row="2" />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Margin="5" Grid.Column="0" Grid.Row="2">
             <TextBlock Text="Стандартный раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Margin="5">
@@ -72,8 +75,9 @@
             </StackPanel>
         </StackPanel>
 
-        <Border Background="{DynamicResource PreHolidayGradientBrush}" Grid.Column="1" Grid.Row="2" />
-        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="2">
+        <Border Background="{DynamicResource PreHolidayGradientBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="80" Grid.Column="1" Grid.Row="2" />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Margin="5" Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Предпраздн. раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Margin="5">
@@ -87,11 +91,20 @@
             </StackPanel>
         </StackPanel>
 
+        <Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Margin="5" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3">
+            <Button Command="{Binding ImportCommand}" Content="Импортировать" Width="120" Margin="0,0,0,5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
+            <Button Command="{Binding ExportCommand}" Content="Экспортировать" Width="120" Margin="0,5,0,0"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
+        </StackPanel>
+        
         <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150"
-                Grid.Column="3" Grid.Row="2" />
+                HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Margin="10" Grid.Column="1" Grid.Row="3" />
 
         <CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
-                  Grid.Column="4" Grid.Row="2" />
+                  Margin="10" Grid.Column="0" Grid.Row="3" />
 
     </Grid>
 </Base:ViewBase>

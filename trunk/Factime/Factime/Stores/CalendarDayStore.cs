@@ -21,6 +21,15 @@ namespace Factime.Stores
             set;
         }
 
+        //private FactimeSettings _factimeSettings;
+        //public FactimeSettings FactimeSettings
+        //{
+        //    get
+        //    {
+        //        return _factimeSettings ?? (_factimeSettings = FactimeSettingsStore.Load());
+        //    }
+        //}
+
         public override void Save(List<CalendarDay> storeObject)
         {
             try
@@ -38,13 +47,11 @@ namespace Factime.Stores
             { 
                 throw e;
             }
-
-            
         }
 
         public override List<CalendarDay> Load()
         {
-            if (File.Exists(FileName)) throw new FileNotFoundException(FileName);
+            if (!File.Exists(FileName)) return null; //throw new FileNotFoundException(FileName);
 
             var calendarDayCollection = new List<CalendarDay>();
 
