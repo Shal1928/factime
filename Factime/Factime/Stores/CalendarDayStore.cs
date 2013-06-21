@@ -35,12 +35,12 @@ namespace Factime.Stores
             try
             {
                 Directory.CreateDirectory(Directory.GetParent(FileName).FullName);
-
+                //31.12.2013 0:00:00 09:00:00 18:30:00
                 //27.05.2014 08:30 18:30
                 using (var file = new StreamWriter(FileName, !Owerwrite))
                 {
                     foreach (var calendarDay in storeObject)
-                        file.WriteLine("{1}{0}{2}{0}{3}", Splitter, calendarDay.Date, calendarDay.Start, calendarDay.End);
+                        file.WriteLine("{1}{0}{2}{0}{3}", Splitter, calendarDay.Date.ToString("dd.MM.yyy"), calendarDay.Start.ToString().Remove(5), calendarDay.End.ToString().Remove(5));
                 }
             }
             catch (Exception e)

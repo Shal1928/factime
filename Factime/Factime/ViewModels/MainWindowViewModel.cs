@@ -22,7 +22,6 @@ namespace Factime.ViewModels
         public MainWindowViewModel()
         {
             _selectedMonth = DateTime.Now.Month;
-            
         }
 
         private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
@@ -172,6 +171,19 @@ namespace Factime.ViewModels
             {
                 _selectStateHoliday = value;
                 OnPropertyChanged(() => SelectStateHoliday);
+            }
+        }
+
+        public string OutputPath
+        {
+            get
+            {
+                return FactimeSettings.OutputPath;
+            }
+            set
+            {
+                FactimeSettings.OutputPath = value;
+                OnPropertyChanged(() => OutputPath);
             }
         }
 
@@ -370,7 +382,8 @@ namespace Factime.ViewModels
 
         private void OnImportCommand()
         {
-
+            CalendarDayStore.FileName = OutputPath;
+            OnLoadedCommand();
         }
 
 
@@ -385,7 +398,19 @@ namespace Factime.ViewModels
 
         private void OnExportCommand()
         {
+            var exportCalendarDayCollection = new List<CalendarDay>();
 
+            var filter = WeekCollection.Filter;
+            WeekCollection.Filter = null;
+
+            //TODO: Send to Action from WeekWrapper
+            foreach (WeekWrapper week in WeekCollection)
+                exportCalendarDayCollection.AddRange(week.GetExportDays());
+
+            CalendarDayStore.FileName = OutputPath;
+            CalendarDayStore.Save(exportCalendarDayCollection);
+
+            WeekCollection.Filter = filter;
         }
 
         #endregion
