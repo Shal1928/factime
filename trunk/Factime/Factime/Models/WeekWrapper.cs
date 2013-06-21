@@ -168,10 +168,34 @@ namespace Factime.Models
         {
             foreach (var calendarDay in GetAllDaysCollection<CalendarDay>())
             {
-                if (calendarDay.IsStateHoliday && calendarDay.Date.DayOfWeek != DayOfWeek.Monday)
+                if (calendarDay.IsStateHoliday)//|| calendarDay.Type == DayType.Holiday //calendarDay.Date.DayOfWeek != DayOfWeek.Monday
                 {
+                    //if(calendarDay.Date.DayOfWeek != DayOfWeek.Saturday && calendarDay.Date.DayOfWeek != DayOfWeek.Sunday)
+                    //{
+                        
+                    //}
+
                     var cDay = GetDayByDate(calendarDay.Date.AddDays(-1));
-                    if (cDay.Type != DayType.Holiday) cDay.Type = DayType.PreHoliday;
+                    if (cDay != null && cDay.Type != DayType.Holiday) 
+                            cDay.Type = DayType.PreHoliday;
+                    //29.04.2013 09:00 17:30
+                    //06.05.2013 09:00 17:30
+                    //07.05.2013 09:00 17:30
+                    //13.05.2013 09:00 17:30
+                    //14.05.2013 09:00 17:30
+                    //15.05.2013 09:00 17:30
+                    //16.05.2013 09:00 17:30
+                    //17.05.2013 09:00 17:30
+                    //20.05.2013 09:00 17:30
+                    //21.05.2013 09:00 17:30
+                    //22.05.2013 09:00 17:30
+                    //23.05.2013 09:00 17:30
+                    //24.05.2013 09:00 17:30
+                    //27.05.2013 09:00 17:30
+                    //28.05.2013 09:00 17:30
+                    //29.05.2013 09:00 17:30
+                    //30.05.2013 09:00 17:30
+                    //31.05.2013 09:00 17:30
                 }
             }
 

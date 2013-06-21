@@ -333,6 +333,14 @@ namespace Factime.ViewModels
             }
         }
 
+        private void UpdateWorkTime()
+        {
+            UpdateWorkTime(DayType.Workday, WorkdayStartTime, true);
+            UpdateWorkTime(DayType.Workday, WorkdayEndTime, false);
+            UpdateWorkTime(DayType.Workday, PreholidayStartTime, true);
+            UpdateWorkTime(DayType.Workday, PreholidayEndTime, false);
+        }
+
         private void UpdateWeekCollections(List<WeekWrapper> weekCollection)
         {
             var view = CollectionViewSource.GetDefaultView(weekCollection);
@@ -425,6 +433,7 @@ namespace Factime.ViewModels
 
         private void OnImportCommand()
         {
+            UpdateWorkTime();
             //_holidayCollection.Clear();
             CalendarDayStore.FileName = OutputPath;
             _isFilterNull = false;
@@ -448,6 +457,7 @@ namespace Factime.ViewModels
 
         private void OnExportCommand()
         {
+            UpdateWorkTime();
             var exportCalendarDayCollection = new List<CalendarDay>();
 
             var filter = WeekCollection.Filter;
