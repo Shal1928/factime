@@ -35,7 +35,6 @@ namespace Factime.Stores
             try
             {
                 Directory.CreateDirectory(Directory.GetParent(FileName).FullName);
-                //31.12.2013 0:00:00 09:00:00 18:30:00
                 //27.05.2014 08:30 18:30
                 using (var file = new StreamWriter(FileName, !Owerwrite))
                 {

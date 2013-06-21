@@ -19,6 +19,9 @@ namespace Factime.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private bool _isFilterNull = true;
+        private bool _isImporting;
+
         public MainWindowViewModel()
         {
             _selectedMonth = DateTime.Now.Month;
@@ -81,19 +84,57 @@ namespace Factime.ViewModels
                 Type = DayType.Holiday
             };
 
-            if (CalendarDayCollection!=null)
+            if (CalendarDayCollection != null && _isImporting)
             {
-                foreach (var calendarDay in CalendarDayCollection)
+                var weeks = CalendarDay.ToList(CalendarDayCollection);//.SeparateByWeeks();
+                
+                //foreach (var calendarDay in CalendarDayCollection)
+                //{
+                //    foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
+                //        if (calendarDay.Date.Equals(weekWrap)) weekWrap.Fill(calendarDay);
+
+                //    //if (calendarDay.Date.ThisDateBelongsToThisWeek(weekWrapper.GetAllDaysCollection<DateTime>())) 
+                //    //    weekWrapper.GetDayByDate(calendarDay.Date).Fill(calendarDay);
+
+                    
+
+                //    //foreach (var daysOfWeek in weeks)
+                //    //{
+                //    //    _holidayCollection.AddRange(weekWrapper.GetAllDaysCollection<DateTime>().FindMissing<DateTime>(daysOfWeek).ToList());
+                //    //}
+
+                //}
+                //if (_holidayCollection.Count >= 142) 
+                //    System.Diagnostics.Debugger.Break();
+
+                var holidayCollection = new List<DateTime>();
+                holidayCollection.AddRange(weekWrapper.GetAllDaysCollection<DateTime>().FindMissing<DateTime>(weeks).ToList());
+
+
+                //foreach (var calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType())
+                //{
+                //    foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
+                //        if (calendarDay.Date.Equals(weekWrap.Date)) 
+                //            weekWrap.Fill(calendarDay);
+                //}
+
+                foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
                 {
-                    foreach (var weekWrap in weekWrapper.GetAllDaysCollection())
+                    foreach (var calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType())
                     {
-                        if (calendarDay.Date.Equals(weekWrap)) weekWrap.Fill(calendarDay);
+                            if (calendarDay.Date.Equals(weekWrap.Date))
+                                    weekWrapper.SetDay(calendarDay);
+                                    //weekWrap.Fill(calendarDay);
                     }
                 }
+
+                
             }
             
             return weekWrapper;
         }
+
+        //private List<DateTime> _holidayCollection = new List<DateTime>();
 
         //private ObservableCollection<WeekWrapper> _weekCollections;
         //public ObservableCollection<WeekWrapper> WeekCollections
@@ -156,6 +197,7 @@ namespace Factime.ViewModels
             {
                 _selectedMonth = value;
                 OnPropertyChanged(() => SelectedMonth);
+                _isFilterNull = false;
                 UpdateFilterWeekCollections();
             }
         }
@@ -302,7 +344,8 @@ namespace Factime.ViewModels
 
         private void UpdateFilterWeekCollections()
         {
-            WeekCollection.Filter = FilterPredicate;
+            if (_isFilterNull) WeekCollection.Filter = null;
+            else WeekCollection.Filter = FilterPredicate;
         }
      
         private bool FilterPredicate(object item)
@@ -312,7 +355,7 @@ namespace Factime.ViewModels
 
             var date = new DateTime(DateTime.Now.Year, SelectedMonth, 1);
             var weeks = date.GetWeeksAndDaysOfMonth();
-
+            _isImporting = false;
             return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
         }
 
@@ -382,8 +425,15 @@ namespace Factime.ViewModels
 
         private void OnImportCommand()
         {
+            //_holidayCollection.Clear();
             CalendarDayStore.FileName = OutputPath;
+            _isFilterNull = false;
+            _isImporting = true;
             OnLoadedCommand();
+            _isFilterNull = true;
+            _isImporting = false;
+            //foreach (var holiday in _holidayCollection)
+            //    Console.WriteLine(holiday);
         }
 
 
