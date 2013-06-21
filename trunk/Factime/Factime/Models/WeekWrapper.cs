@@ -113,6 +113,14 @@ namespace Factime.Models
             return GetDaysByType(DayType.Workday);
         }
 
+        public List<CalendarDay> GetExportDays()
+        {
+            var days = new List<CalendarDay>();
+            days.AddRange(GetAllDaysCollection().Where(calendarDay => calendarDay.Type == DayType.Workday || calendarDay.Type == DayType.PreHoliday));
+
+            return days;
+        }
+
         private List<CalendarDay> GetDaysByType(DayType dayType)
         {
             var days = new List<CalendarDay>();

@@ -99,6 +99,9 @@
             <Button Command="{Binding ExportCommand}" Content="Экспортировать" Width="120" Margin="0,5,0,0"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
         </StackPanel>
+
+        <TextBox Text="{Binding OutputPath}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,5,10,5" 
+                 Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="3" />
         
         <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150"
                 HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Margin="10" Grid.Column="1" Grid.Row="3" />
