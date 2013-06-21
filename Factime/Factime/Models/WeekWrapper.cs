@@ -116,7 +116,7 @@ namespace Factime.Models
         public List<CalendarDay> GetExportDays()
         {
             var days = new List<CalendarDay>();
-            days.AddRange(GetAllDaysCollection().Where(calendarDay => calendarDay.Type == DayType.Workday || calendarDay.Type == DayType.PreHoliday));
+            days.AddRange(GetAllDaysCollection<CalendarDay>().Where(calendarDay => calendarDay.Type == DayType.Workday || calendarDay.Type == DayType.PreHoliday));
 
             return days;
         }
@@ -124,7 +124,7 @@ namespace Factime.Models
         private List<CalendarDay> GetDaysByType(DayType dayType)
         {
             var days = new List<CalendarDay>();
-            days.AddRange(GetAllDaysCollection().Where(calendarDay => calendarDay.Type == dayType));
+            days.AddRange(GetAllDaysCollection<CalendarDay>().Where(calendarDay => calendarDay.Type == dayType));
 
             return days;
         }
@@ -157,7 +157,7 @@ namespace Factime.Models
         {
             foreach (var stateHolidayDate in stateHolidaysDateCollection)
             {
-                foreach (var calendarDay in GetAllDaysCollection())
+                foreach (var calendarDay in GetAllDaysCollection<CalendarDay>())
                     if (calendarDay.Date.Day == stateHolidayDate.Day && calendarDay.Date.Month == stateHolidayDate.Month) calendarDay.IsStateHoliday = true;
             }
 
@@ -166,7 +166,7 @@ namespace Factime.Models
 
         public void SetPreHolidays()
         {
-            foreach (var calendarDay in GetAllDaysCollection())
+            foreach (var calendarDay in GetAllDaysCollection<CalendarDay>())
             {
                 if (calendarDay.IsStateHoliday && calendarDay.Date.DayOfWeek != DayOfWeek.Monday)
                 {
@@ -174,17 +174,39 @@ namespace Factime.Models
                     if (cDay.Type != DayType.Holiday) cDay.Type = DayType.PreHoliday;
                 }
             }
-                
+
         }
 
-        public List<CalendarDay> GetAllDaysCollection()
+        public void SetDay(CalendarDay calendarDay)
         {
-            return new List<CalendarDay> {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
+            var cDay = GetDayByDate(calendarDay.Date);
+            cDay.Type = calendarDay.Type;
+            cDay.Start = calendarDay.Start;
+            cDay.End = calendarDay.End;
+
+            if (cDay.Type == DayType.Holiday) SetPreHolidays();
+        }
+
+        //TODO: Resolve this Magic!
+        public List<T> GetAllDaysCollection<T>() 
+        {
+            return typeof(T) == typeof(DateTime) ? new List<T> { (dynamic)Monday.Date, (dynamic)Tuesday.Date, (dynamic)Wednesday.Date, (dynamic)Thursday.Date, (dynamic)Friday.Date, (dynamic)Saturday.Date, (dynamic)Sunday.Date } :
+                                                   new List<T> { (dynamic)Monday, (dynamic)Tuesday, (dynamic)Wednesday, (dynamic)Thursday, (dynamic)Friday, (dynamic)Saturday, (dynamic)Sunday };
         }
 
         public CalendarDay GetDayByDate(DateTime date)
         {
-            return GetAllDaysCollection().Where(cDay => cDay.Date == date).FirstOrDefault();
+            return GetAllDaysCollection<CalendarDay>().Where(cDay => cDay.Date == date).FirstOrDefault();
         }
+
+        //public static explicit operator WeekWrapper(List<CalendarDay> calendarDayCollection)
+        //{
+        //    return new WeekWrapper();
+        //}
+
+        //public static explicit operator WeekWrapper(List<CalendarDay> calendarDayCollection)
+        //{
+        //    return new WeekWrapper();
+        //}
     }
 }
