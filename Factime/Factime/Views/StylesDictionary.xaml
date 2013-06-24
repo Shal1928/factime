@@ -437,4 +437,8 @@
         <GradientStop Color="{StaticResource MediumLightGrayVankor}" Offset="0.75"/>
         <GradientStop Color="{StaticResource GrayVankor}" Offset="1"/>
     </LinearGradientBrush>
+
+
+    
+    
 </ResourceDictionary>

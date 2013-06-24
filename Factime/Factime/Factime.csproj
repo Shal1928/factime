@@ -150,6 +150,10 @@
       <Project>{8AC0BF72-84A5-4E2E-9A85-1DEF2167B51E}</Project>
       <Name>UseAbilities.MVVM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Visual\UseAbilities.Visual.csproj">
+      <Project>{9267C3C2-5D30-45CD-ABF0-27E262E7EC58}</Project>
+      <Name>UseAbilities.Visual</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.WPF\UseAbilities.WPF.csproj">
       <Project>{DE840968-7F50-41F7-B88A-59ADD6B61D73}</Project>
       <Name>UseAbilities.WPF</Name>
