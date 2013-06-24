@@ -4,10 +4,10 @@
         xmlns:Base="clr-namespace:UseAbilities.MVVM.Base;assembly=UseAbilities.MVVM"
         xmlns:Controls="clr-namespace:Factime.Controls" 
         xmlns:Converters="clr-namespace:Factime.Converters"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" Title="Factime" 
-        MinWidth="729" MaxWidth="729"
-        MinHeight="500"
-        Width="695" Height="550">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Actions="clr-namespace:UseAbilities.WPF.Actions;assembly=UseAbilities.WPF" Title="Factime" 
+        MinWidth="729" MaxWidth="729" MinHeight="500"
+        Width="695" Height="Auto">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -21,6 +21,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+            <Actions:SetPropertyAction Property="SizeToContent" Value="WidthAndHeight" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -43,7 +44,10 @@
         <Controls:MonthSelector SelectedMonth="{Binding SelectedMonth, Mode=TwoWay}" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
-        
+
+        <Controls:YearSelector SelectedYear="{Binding SelectedYear, Mode=TwoWay}" Margin="10,10,25,10" HorizontalAlignment="Right" VerticalAlignment="Center"
+                               Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+
         <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" >
             <DataGrid.Columns>
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />

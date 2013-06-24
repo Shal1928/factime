@@ -17,6 +17,12 @@
         <x:Static Member="Models:DayType.PreHoliday" />
         <x:Static Member="Models:DayType.Holiday" />
     </x:Array>-->
+
+    <ControlTemplate x:Key="YearDatePickerTemplate" TargetType="{x:Type DatePicker}">
+        <TextBox Width="60" TextAlignment="Center" x:Name="PART_TextBox"
+                            Text="{Binding Path=SelectedDate, StringFormat='MM yy', RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, FallbackValue='-- --'}" />
+    </ControlTemplate>
+    
     
     <DataTemplate x:Key="DefaultDataGridDataTemplate">
         <Grid Style="{DynamicResource DefaultGridCellTemplate}">

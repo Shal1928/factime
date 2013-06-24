@@ -61,7 +61,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TestUserControl.xaml">
+    <Page Include="Controls\YearSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -78,14 +78,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Behaviors\GridMouseOverBehavior.cs" />
-    <Compile Include="Behaviors\RadiobuttonPreviewEventBehavior.cs" />
+    <Compile Include="Behaviors\YearSelectorBehavior.cs" />
     <Compile Include="Controls\CalendarDayChecker.cs" />
     <Compile Include="Controls\DataGridTemplateColumnExt.cs" />
     <Compile Include="Controls\MonthSelector.xaml.cs">
       <DependentUpon>MonthSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TestUserControl.xaml.cs">
-      <DependentUpon>TestUserControl.xaml</DependentUpon>
+    <Compile Include="Controls\YearSelector.xaml.cs">
+      <DependentUpon>YearSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CompareConditionMultiConverter.cs" />
     <Compile Include="Converters\DayTypeToBoolConverter.cs" />
