@@ -14,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Views\StylesDictionary.xaml" />
                 <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
+                <ResourceDictionary Source="/UseAbilities.Visual;component/Styles\Controls\Buttons\SquareButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -101,9 +102,9 @@
         <Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" />
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                     Margin="5" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3">
-            <Button Command="{Binding ImportCommand}" Content="Импортировать" Width="120" Margin="0,0,0,5"
+            <Button Command="{Binding ImportCommand}" Content="Импортировать" Width="120" Margin="0,0,0,5" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
-            <Button Command="{Binding ExportCommand}" Content="Экспортировать" Width="120" Margin="0,5,0,0"
+            <Button Command="{Binding ExportCommand}" Content="Экспортировать" Width="120" Margin="0,5,0,0" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
         </StackPanel>
 
@@ -112,9 +113,9 @@
             <TextBlock Text="Файл экспорта" FontFamily="Verdana" Margin="0,0,0,2" />
             <TextBox Text="{Binding OutputPath, Mode=TwoWay}" />
         </StackPanel>
-        
-        
-        <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150"
+
+
+        <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Margin="10" Grid.Column="1" Grid.Row="3" />
 
         <CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
