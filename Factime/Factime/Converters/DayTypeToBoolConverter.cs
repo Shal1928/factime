@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using Factime.Models;
 using UseAbilities.WPF.Converters.Base;
@@ -28,7 +27,7 @@ namespace Factime.Converters
             if (!(value is bool) && !(parameter is DayType)) throw new Exception(" Value is not bool or parametr is not DayType!");
 
             if((bool)value) return (DayType)parameter;
-            return Binding.DoNothing; //DependencyProperty.UnsetValue;
+            return Binding.DoNothing;
         }
     }
 }
