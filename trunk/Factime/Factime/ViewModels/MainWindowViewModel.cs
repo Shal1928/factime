@@ -337,8 +337,8 @@ namespace Factime.ViewModels
         {
             UpdateWorkTime(DayType.Workday, WorkdayStartTime, true);
             UpdateWorkTime(DayType.Workday, WorkdayEndTime, false);
-            UpdateWorkTime(DayType.Workday, PreholidayStartTime, true);
-            UpdateWorkTime(DayType.Workday, PreholidayEndTime, false);
+            UpdateWorkTime(DayType.PreHoliday, PreholidayStartTime, true);
+            UpdateWorkTime(DayType.PreHoliday, PreholidayEndTime, false);
         }
 
         private void UpdateWeekCollections(List<WeekWrapper> weekCollection)
@@ -457,18 +457,18 @@ namespace Factime.ViewModels
 
         private void OnExportCommand()
         {
-            UpdateWorkTime();
-            var exportCalendarDayCollection = new List<CalendarDay>();
-
             var filter = WeekCollection.Filter;
             WeekCollection.Filter = null;
 
+            UpdateWorkTime();
+            var exportCalendarDayCollection = new List<CalendarDay>();
+            
             //TODO: Send to Action from WeekWrapper
             foreach (WeekWrapper week in WeekCollection)
                 exportCalendarDayCollection.AddRange(week.GetExportDays());
 
             CalendarDayStore.FileName = OutputPath;
-            UpdateTimeTemp(ref exportCalendarDayCollection, WorkdayStartTime, WorkdayEndTime);
+            //UpdateTimeTemp(ref exportCalendarDayCollection, WorkdayStartTime, WorkdayEndTime);
             CalendarDayStore.Save(exportCalendarDayCollection);
 
             WeekCollection.Filter = filter;
