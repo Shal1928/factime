@@ -45,8 +45,11 @@
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
 
-        <Controls:YearSelector SelectedYear="{Binding SelectedYear, Mode=TwoWay}" Margin="10,10,25,10" HorizontalAlignment="Right" VerticalAlignment="Center"
+        <Controls:YearSelector SelectedYear="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,25,10" HorizontalAlignment="Right" VerticalAlignment="Center"
                                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" />
+        <!--<Controls:YearSelector.InputBindings>
+            <KeyBinding Key="Enter" Command="{Binding LoadedCommand}" />
+        </Controls:YearSelector.InputBindings>-->
 
         <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" >
             <DataGrid.Columns>
