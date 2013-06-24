@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using Factime.Models;
-using Factime.Stores;
 using UseAbilities.Extensions.DateTimeExt;
 using UseAbilities.Extensions.EnumerableExt;
 using UseAbilities.IoC.Attributes;
@@ -19,136 +16,19 @@ namespace Factime.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private bool _isFilterNull = true;
-        private bool _isImporting;
-
         public MainWindowViewModel()
         {
             _selectedMonth = DateTime.Now.Month;
         }
 
-        private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
-        {
-            var weekWrapper = new WeekWrapper(currentMonth);
 
-            var startTime = new TimeSpan(9, 00, 00);
-            var endTime = new TimeSpan(18, 30, 00);          
+        #region Private Fields
 
-            weekWrapper.Monday = new CalendarDay
-            {
-                Date = week[0],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Workday
-            };
-            weekWrapper.Tuesday = new CalendarDay
-            {
-                Date = week[1],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Workday
-            };
-            weekWrapper.Wednesday = new CalendarDay
-            {
-                Date = week[2],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Workday
-            };
-            weekWrapper.Thursday = new CalendarDay
-            {
-                Date = week[3],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Workday
-            };
-            weekWrapper.Friday = new CalendarDay
-            {
-                Date = week[4],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Workday
-            };
-            weekWrapper.Saturday = new CalendarDay
-            {
-                Date = week[5],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Holiday
-            };
-            weekWrapper.Sunday = new CalendarDay
-            {
-                Date = week[6],
-                Start = startTime,
-                End = endTime,
-                Type = DayType.Holiday
-            };
+        private bool _isFilterNull = true;
+        private bool _isImporting;
 
-            if (CalendarDayCollection != null && _isImporting)
-            {
-                var weeks = CalendarDay.ToList(CalendarDayCollection);//.SeparateByWeeks();
-                
-                //foreach (var calendarDay in CalendarDayCollection)
-                //{
-                //    foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
-                //        if (calendarDay.Date.Equals(weekWrap)) weekWrap.Fill(calendarDay);
+        #endregion
 
-                //    //if (calendarDay.Date.ThisDateBelongsToThisWeek(weekWrapper.GetAllDaysCollection<DateTime>())) 
-                //    //    weekWrapper.GetDayByDate(calendarDay.Date).Fill(calendarDay);
-
-                    
-
-                //    //foreach (var daysOfWeek in weeks)
-                //    //{
-                //    //    _holidayCollection.AddRange(weekWrapper.GetAllDaysCollection<DateTime>().FindMissing<DateTime>(daysOfWeek).ToList());
-                //    //}
-
-                //}
-                //if (_holidayCollection.Count >= 142) 
-                //    System.Diagnostics.Debugger.Break();
-
-                var holidayCollection = new List<DateTime>();
-                holidayCollection.AddRange(weekWrapper.GetAllDaysCollection<DateTime>().FindMissing<DateTime>(weeks).ToList());
-
-
-                //foreach (var calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType())
-                //{
-                //    foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
-                //        if (calendarDay.Date.Equals(weekWrap.Date)) 
-                //            weekWrap.Fill(calendarDay);
-                //}
-
-                foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
-                {
-                    foreach (var calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType())
-                    {
-                            if (calendarDay.Date.Equals(weekWrap.Date))
-                                    weekWrapper.SetDay(calendarDay);
-                                    //weekWrap.Fill(calendarDay);
-                    }
-                }
-
-                
-            }
-            
-            return weekWrapper;
-        }
-
-        //private List<DateTime> _holidayCollection = new List<DateTime>();
-
-        //private ObservableCollection<WeekWrapper> _weekCollections;
-        //public ObservableCollection<WeekWrapper> WeekCollections
-        //{
-        //    get
-        //    {
-        //        return _weekCollections;
-        //    }
-        //    set
-        //    {
-        //        _weekCollections = value;
-        //        OnPropertyChanged(() => WeekCollections);
-        //    }
-        //}
 
         #region InjectedProperty
 
@@ -167,6 +47,23 @@ namespace Factime.ViewModels
         }
 
         #endregion
+
+
+        #region Other Public Properties
+
+        private ICollectionView _weekCollection;
+        public ICollectionView WeekCollection
+        {
+            get
+            {
+                return _weekCollection;
+            }
+            set
+            {
+                _weekCollection = value;
+                OnPropertyChanged(() => WeekCollection);
+            }
+        }
 
         private FactimeSettings _factimeSettings;
         public FactimeSettings FactimeSettings
@@ -229,6 +126,9 @@ namespace Factime.ViewModels
             }
         }
 
+        #endregion
+
+        
         #region Start & End Time Properties
 
         public TimeSpan WorkdayStartTime
@@ -289,27 +189,93 @@ namespace Factime.ViewModels
 
         #endregion
 
-        private ICollectionView _weekCollection;
-        public ICollectionView WeekCollection
+
+        #region Private Helpers Methods
+
+        private WeekWrapper WrapCalendarDays(IList<DateTime> week, int currentMonth)
         {
-            get
+            var weekWrapper = new WeekWrapper(currentMonth);
+
+            var startTime = new TimeSpan(9, 00, 00);
+            var endTime = new TimeSpan(18, 30, 00);
+
+            weekWrapper.Monday = new CalendarDay
             {
-                return _weekCollection;
-            }
-            set
+                Date = week[0],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Workday
+            };
+            weekWrapper.Tuesday = new CalendarDay
             {
-                _weekCollection = value;
-                OnPropertyChanged(() => WeekCollection);
+                Date = week[1],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Workday
+            };
+            weekWrapper.Wednesday = new CalendarDay
+            {
+                Date = week[2],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Workday
+            };
+            weekWrapper.Thursday = new CalendarDay
+            {
+                Date = week[3],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Workday
+            };
+            weekWrapper.Friday = new CalendarDay
+            {
+                Date = week[4],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Workday
+            };
+            weekWrapper.Saturday = new CalendarDay
+            {
+                Date = week[5],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Holiday
+            };
+            weekWrapper.Sunday = new CalendarDay
+            {
+                Date = week[6],
+                Start = startTime,
+                End = endTime,
+                Type = DayType.Holiday
+            };
+
+            if (CalendarDayCollection != null && _isImporting)
+            {
+                var weeks = CalendarDay.ToList(CalendarDayCollection);
+                var holidayCollection = new List<DateTime>();
+                holidayCollection.AddRange(weekWrapper.GetAllDaysCollection<DateTime>().FindMissing<DateTime>(weeks).ToList());
+
+                //foreach (var weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>())
+                //    foreach (var calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType())
+                //        if (calendarDay.Date.Equals(weekWrap.Date)) weekWrapper.SetDay(calendarDay);
+                foreach (var calendarDay in
+                                         from weekWrap in weekWrapper.GetAllDaysCollection<CalendarDay>()
+                                         from calendarDay in CalendarDay.ToList(holidayCollection).SetHolidayType()
+                                         where calendarDay.Date.Equals(weekWrap.Date)
+                                         select calendarDay)
+                    weekWrapper.SetDay(calendarDay);
             }
+
+            return weekWrapper;
         }
 
         private void UpdateWorkTime(DayType dayType, TimeSpan time, bool isStartTime)
         {
             //Update StartTime
-            if(isStartTime)
+            if (isStartTime)
             {
                 //Update Workday
-                if(dayType == DayType.Workday)
+                if (dayType == DayType.Workday)
                     foreach (WeekWrapper weekWrapper in WeekCollection)
                         weekWrapper.SetStartTimeForWorkday(time);
 
@@ -355,7 +321,7 @@ namespace Factime.ViewModels
             if (_isFilterNull) WeekCollection.Filter = null;
             else WeekCollection.Filter = FilterPredicate;
         }
-     
+
         private bool FilterPredicate(object item)
         {
             var weekWrapper = item as WeekWrapper;
@@ -367,6 +333,9 @@ namespace Factime.ViewModels
             return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
         }
 
+        #endregion
+
+        
         #region Commands
 
         private ICommand _saveSettingsCommand;
@@ -434,15 +403,12 @@ namespace Factime.ViewModels
         private void OnImportCommand()
         {
             UpdateWorkTime();
-            //_holidayCollection.Clear();
             CalendarDayStore.FileName = OutputPath;
             _isFilterNull = false;
             _isImporting = true;
             OnLoadedCommand();
             _isFilterNull = true;
             _isImporting = false;
-            //foreach (var holiday in _holidayCollection)
-            //    Console.WriteLine(holiday);
         }
 
 
@@ -468,29 +434,12 @@ namespace Factime.ViewModels
                 exportCalendarDayCollection.AddRange(week.GetExportDays());
 
             CalendarDayStore.FileName = OutputPath;
-            //UpdateTimeTemp(ref exportCalendarDayCollection, WorkdayStartTime, WorkdayEndTime);
             CalendarDayStore.Save(exportCalendarDayCollection);
 
             WeekCollection.Filter = filter;
         }
 
-        private void UpdateTimeTemp(ref List<CalendarDay> calendarDayCollection, TimeSpan startTime, TimeSpan endTime)
-        {
-            foreach (var calendarDay in calendarDayCollection)
-                if(calendarDay.Type == DayType.Workday)
-                {
-                    calendarDay.Start = startTime;
-                    calendarDay.End = endTime;
-                }
-                else
-                {
-                    calendarDay.Start = startTime;
-                    calendarDay.End = endTime - new TimeSpan(1, 0, 0);
-                }
-        }
-
         #endregion
 
-        
-    }
-}
+    }//End Class
+}//End Namespace

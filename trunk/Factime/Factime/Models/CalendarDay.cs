@@ -22,7 +22,6 @@ namespace Factime.Models
         {
             Start = calendarDay.Start;
             End = calendarDay.End;
-            if (Type == DayType.Workday && calendarDay.Type == DayType.Holiday) System.Diagnostics.Debugger.Break();
             Type = calendarDay.Type;
             IsStateHoliday = calendarDay.IsStateHoliday;
         }
