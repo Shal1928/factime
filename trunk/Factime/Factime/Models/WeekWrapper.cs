@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Factime.Models
@@ -143,14 +144,14 @@ namespace Factime.Models
 
         public void SetStartTimeForPreholiday(TimeSpan time)
         {
-            foreach (var work in GetPreholidays())
-                work.Start = time;
+            foreach (var preholiday in GetPreholidays())
+                preholiday.Start = time;
         }
 
         public void SetEndTimeForPreholiday(TimeSpan time)
         {
-            foreach (var work in GetPreholidays())
-                work.End = time;
+            foreach (var preholiday in GetPreholidays())
+                preholiday.End = time;
         }
 
         public void SetStateHolidays(List<DateTime> stateHolidaysDateCollection)
@@ -176,8 +177,9 @@ namespace Factime.Models
                     //}
 
                     var cDay = GetDayByDate(calendarDay.Date.AddDays(-1));
-                    if (cDay != null && cDay.Type != DayType.Holiday) 
-                            cDay.Type = DayType.PreHoliday;
+                    if (cDay != null && cDay.Type != DayType.Holiday) cDay.Type = DayType.PreHoliday;
+                    
+                            
                     //29.04.2013 09:00 17:30
                     //06.05.2013 09:00 17:30
                     //07.05.2013 09:00 17:30
