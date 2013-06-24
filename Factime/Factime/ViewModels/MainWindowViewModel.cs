@@ -19,6 +19,7 @@ namespace Factime.ViewModels
         public MainWindowViewModel()
         {
             _selectedMonth = DateTime.Now.Month;
+            _selectedYear = DateTime.Now.Year;
         }
 
 
@@ -99,6 +100,23 @@ namespace Factime.ViewModels
             }
         }
 
+        private int _selectedYear;
+        public int SelectedYear
+        {
+            get
+            {
+                return _selectedYear;
+            }
+            set
+            {
+                _selectedYear = value;
+                OnPropertyChanged(() => SelectedYear);
+                _isFilterNull = false;
+                _isImporting = false;
+                OnLoadedCommand();
+            }
+        }
+        
         private bool _selectStateHoliday;
         public bool SelectStateHoliday
         {
@@ -327,7 +345,7 @@ namespace Factime.ViewModels
             var weekWrapper = item as WeekWrapper;
             if (weekWrapper == null) return false;
 
-            var date = new DateTime(DateTime.Now.Year, SelectedMonth, 1);
+            var date = new DateTime(SelectedYear, SelectedMonth, 1);
             var weeks = date.GetWeeksAndDaysOfMonth();
             _isImporting = false;
             return weeks.Select(week => WrapCalendarDays(week, SelectedMonth)).Any(weekWrapper.Equals);
@@ -377,7 +395,7 @@ namespace Factime.ViewModels
 
             for (var i = 1; i <= 12; i++)
             {
-                var date = new DateTime(DateTime.Now.Year, i, 1);
+                var date = new DateTime(SelectedYear, i, 1);
                 var weeks = date.GetWeeksAndDaysOfMonth();
 
                 weekCollection.AddRange(weeks.Select(week => WrapCalendarDays(week, i)));
