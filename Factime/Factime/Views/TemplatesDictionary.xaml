@@ -2,8 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Behaviors="clr-namespace:Factime.Behaviors"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:Converters="clr-namespace:UseAbilities.WPF.Converters;assembly=UseAbilities.WPF"
-                    xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF">
+                    xmlns:Converters="clr-namespace:Factime.Converters" xmlns:Models="clr-namespace:Factime.Models">
 
     <!--<x:Array x:Key="ConverterParametrForHoliday" Type="{x:Type Models:DayType}">
         <x:Static Member="Models:DayType.Workday" />
@@ -37,18 +36,13 @@
             <Border Background="Transparent" BorderBrush="Transparent" 
                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4" />
             
-            <!--<TextBlock Style="{DynamicResource TextPresenter}" />-->
             <ToggleButton Style="{DynamicResource DateToggleButton}" IsChecked="{Binding IsStateHoliday, Mode=TwoWay}"
                           IsEnabled="{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                           Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
-            
-            <RadioButton Style="{DynamicResource HolydayRadioButtonPresenter}" />
-            <RadioButton Style="{DynamicResource PreHolidayRadioButtonPresenter}" />
-            <RadioButton Style="{DynamicResource WorkdayRadioButtonPresenter}" />
 
-            <!--<ToggleButton Content="Гос. праздник" Style="{DynamicResource RadioButtonPresenter}" IsChecked="{Binding IsStateHoliday, Mode=TwoWay}"
-                          Visibility="{Binding DataContext.SelectStateHoliday, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Converter={Converters:BoolToVisibilityConverter}, ConverterParameter=Collapse}"
-                          Grid.Column="0" Grid.Row="2" />-->
+            <RadioButton IsChecked="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Holiday}, Converter={Converters:DayTypeToBoolConverter}}" Style="{DynamicResource HolydayRadioButtonPresenter}" />
+            <RadioButton IsChecked="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.PreHoliday}, Converter={Converters:DayTypeToBoolConverter}}" Style="{DynamicResource PreHolidayRadioButtonPresenter}" />
+            <RadioButton IsChecked="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Workday}, Converter={Converters:DayTypeToBoolConverter}}" Style="{DynamicResource WorkdayRadioButtonPresenter}" />
 
         </Grid>
     </DataTemplate>

@@ -468,9 +468,25 @@ namespace Factime.ViewModels
                 exportCalendarDayCollection.AddRange(week.GetExportDays());
 
             CalendarDayStore.FileName = OutputPath;
+            UpdateTimeTemp(ref exportCalendarDayCollection, WorkdayStartTime, WorkdayEndTime);
             CalendarDayStore.Save(exportCalendarDayCollection);
 
             WeekCollection.Filter = filter;
+        }
+
+        private void UpdateTimeTemp(ref List<CalendarDay> calendarDayCollection, TimeSpan startTime, TimeSpan endTime)
+        {
+            foreach (var calendarDay in calendarDayCollection)
+                if(calendarDay.Type == DayType.Workday)
+                {
+                    calendarDay.Start = startTime;
+                    calendarDay.End = endTime;
+                }
+                else
+                {
+                    calendarDay.Start = startTime;
+                    calendarDay.End = endTime - new TimeSpan(1, 0, 0);
+                }
         }
 
         #endregion

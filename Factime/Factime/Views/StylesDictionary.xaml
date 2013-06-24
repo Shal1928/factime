@@ -57,44 +57,51 @@
     </Style>
 
     <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
-        <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Holiday}, Converter={Converters:DayTypeToBoolConverter}}" />
+        <!--<Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Holiday}, Converter={Converters:DayTypeToBoolConverter}}" />-->
 
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Content" Value="Вых." />
         <Setter Property="Margin" Value="5,5,5,3" />
         <Setter Property="Grid.Row" Value="0" />
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <DataTrigger Binding="{Binding IsStateHoliday}" Value="True">
                 <Setter Property="IsChecked" Value="True" />
             </DataTrigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
         
     </Style>
     <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
-        <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.PreHoliday}, Converter={Converters:DayTypeToBoolConverter}}" />
+        <!--<Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.PreHoliday}, Converter={Converters:DayTypeToBoolConverter}}" />-->
 
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Width" Value="32" />
         <Setter Property="Content" Value="Пред." />
         <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Grid.Row" Value="1" />
+
+        <!--<Style.Triggers>
+            <DataTrigger Binding="{Binding IsStateHoliday}" Value="True">
+                <Setter Property="IsChecked" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>-->
+
     </Style>
     <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
-        <Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Workday}, Converter={Converters:DayTypeToBoolConverter}}" />
+        <!--<Setter Property="IsChecked" Value="{Binding Type, Mode=TwoWay, ConverterParameter={x:Static Models:DayType.Workday}, Converter={Converters:DayTypeToBoolConverter}}" />-->
 
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Content" Value="Раб." />
         <Setter Property="Margin" Value="5,3,5,5" />
         <Setter Property="Grid.Row" Value="2" />
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <DataTrigger Binding="{Binding IsStateHoliday}" Value="False">
                 <Setter Property="IsChecked" Value="True" />
             </DataTrigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
-    
+
     <Style x:Key="MonthRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
 
         <Setter Property="Margin" Value="5" />

@@ -20,7 +20,6 @@ namespace Factime.Converters
 
             var displayType = (DayType)value;
             var parametrValue = (DayType)parameter;
-
             return displayType == parametrValue;
         }
 
