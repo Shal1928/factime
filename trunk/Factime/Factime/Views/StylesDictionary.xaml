@@ -393,6 +393,7 @@
     <SolidColorBrush x:Key="YellowSolidBrush" Color="{StaticResource YellowVankor}" />
     <SolidColorBrush x:Key="PinkSolidBrush" Color="{StaticResource PinkVankor}" />
 
+    <SolidColorBrush x:Key="GrayVankorSolidBrush" Color="{StaticResource GrayVankor}" />
     <SolidColorBrush x:Key="GraySolidBrush" Color="{StaticResource DarkGrayVankor}" />
     <SolidColorBrush x:Key="LinkOverSolidBrush" Color="#ff000000" />
     <SolidColorBrush x:Key="LightGraySolidBrush" Color="{StaticResource LightGrayVankor}" />
