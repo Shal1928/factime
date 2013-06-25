@@ -144,6 +144,20 @@ namespace Factime.ViewModels
             }
         }
 
+        private string _fileName;
+        public string FileName
+        {
+            get
+            {
+                return _fileName;
+            }
+            set
+            {
+                _fileName = value;
+                OnPropertyChanged(() => FileName);
+            }
+        }
+
         #endregion
 
         
@@ -421,7 +435,7 @@ namespace Factime.ViewModels
         private void OnImportCommand()
         {
             UpdateWorkTime();
-            CalendarDayStore.FileName = OutputPath;
+            CalendarDayStore.FileName = FileName;
             _isFilterNull = false;
             _isImporting = true;
             OnLoadedCommand();
@@ -451,10 +465,41 @@ namespace Factime.ViewModels
             foreach (WeekWrapper week in WeekCollection)
                 exportCalendarDayCollection.AddRange(week.GetExportDays());
 
-            CalendarDayStore.FileName = OutputPath;
+            CalendarDayStore.FileName = FileName;
             CalendarDayStore.Save(exportCalendarDayCollection);
 
             WeekCollection.Filter = filter;
+        }
+
+
+        private ICommand _fileExportCommand;
+        public ICommand FileExportCommand
+        {
+            get
+            {
+                return _fileExportCommand ?? (_fileExportCommand = new RelayCommand<string>(OnFileExportCommand, null));
+            }
+        }
+
+        private void OnFileExportCommand(string filename)
+        {
+            FileName = filename;
+            OnExportCommand();
+        }
+
+        private ICommand _fileImportCommand;
+        public ICommand FileImportCommand
+        {
+            get
+            {
+                return _fileImportCommand ?? (_fileImportCommand = new RelayCommand<string>(OnFileImportCommand, null));
+            }
+        }
+
+        private void OnFileImportCommand(string filename)
+        {
+            FileName = filename;
+            OnImportCommand();
         }
 
         #endregion
