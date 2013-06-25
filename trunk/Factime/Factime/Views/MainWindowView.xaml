@@ -118,13 +118,21 @@
                         Margin="5,0,5,0" />
             </StackPanel>          
         </StackPanel>
-
+        
 
         <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Margin="10" Grid.Column="1" Grid.Row="3" />
 
         <CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
                   Margin="10" Grid.Column="0" Grid.Row="3" />
+
+        <!--<Button Content="{x:Static Properties:Resources.Ellipsis}"  
+                    Command="{Binding ShowDialogCommand, ElementName=BrowseFolderDialog}"
+                    Width="24" Height="24" Margin="5,20,0,0" 
+                    Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" />
+        <Dialogs:DependencyFolderBrowseDialog Description="{x:Static Properties:Resources.BrowseViewTitle}" 
+                                                  x:Name="BrowseFolderDialog"
+                                                  FolderOkCommand="{Binding FolderOkCommand}" />-->
 
     </Grid>
 </Base:ViewBase>
