@@ -280,7 +280,8 @@
         <Setter Property="ItemContainerStyle" Value="{DynamicResource ItemStyle}"/>
         
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="0,0,0,5" />
+        <Setter Property="BorderBrush" Value="{DynamicResource YellowSolidBrush}" />
         <Setter Property="HorizontalGridLinesBrush" Value="Transparent"/>
         <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
         
