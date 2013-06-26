@@ -117,7 +117,8 @@ namespace Factime.ViewModels
             }
         }
         
-        private bool _selectStateHoliday;
+        //Always true
+        private bool _selectStateHoliday = true;
         public bool SelectStateHoliday
         {
             get

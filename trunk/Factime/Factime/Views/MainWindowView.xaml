@@ -6,10 +6,10 @@
         xmlns:Converters="clr-namespace:Factime.Converters"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Actions="clr-namespace:UseAbilities.WPF.Actions;assembly=UseAbilities.WPF"
-               xmlns:Dialogs="clr-namespace:UseAbilities.Controls.Dialogs;assembly=UseAbilities.Controls"
-               xmlns:Test="clr-namespace:UseAbilities.WPF.Converters.Test;assembly=UseAbilities.WPF" Title="Factime" 
+        xmlns:Dialogs="clr-namespace:UseAbilities.Controls.Dialogs;assembly=UseAbilities.Controls"
+        Title="Factime" 
         MinWidth="729" MaxWidth="729" MinHeight="500"
-        Width="695" Height="Auto">
+        Width="729" Height="Auto">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -53,7 +53,7 @@
         <!--<Controls:YearSelector.InputBindings>
             <KeyBinding Key="Enter" Command="{Binding LoadedCommand}" />
         </Controls:YearSelector.InputBindings>-->
-
+        <!--0,0,0,2-->
         <DataGrid ItemsSource="{Binding WeekCollection}" Style="{StaticResource FactimeDataGridStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" >
             <DataGrid.Columns>
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Monday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Пн" Width="SizeToCells" IsReadOnly="True" />
@@ -69,48 +69,62 @@
 
         <!--<Border Background="{DynamicResource DoubleGrayPanelGradientBrush}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" />-->
 
-        <Border Background="{DynamicResource GrayPanelGradientBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="80" Grid.Column="0" Grid.Row="2" />
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                    Margin="5" Grid.Column="0" Grid.Row="2">
-            <TextBlock Text="Стандартный раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Text="{Binding WorkdayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Text="{Binding WorkdayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
+        <!--<Border Background="{DynamicResource VeryLightGrayVankorSolidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" />-->
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="10" Grid.Column="0" Grid.Row="2">
+                <TextBlock Text="Стандартный раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="С" FontFamily="Verdana" Margin="0,3,5,0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding WorkdayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" Height="18" BorderBrush="Transparent" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,5,5">
+                        <TextBlock Text="до" FontFamily="Verdana" Margin="0,3,5,0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding WorkdayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" Height="18" BorderBrush="Transparent" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
 
-        <Border Background="{DynamicResource PreHolidayGradientBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="80" Grid.Column="1" Grid.Row="2" />
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                    Margin="5" Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="Предпраздн. раб. день" FontWeight="DemiBold" FontFamily="Verdana" Margin="0,0,0,2" />
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock Text="Начало" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Text="{Binding PreholidayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock Text="Конец" FontFamily="Verdana" Margin="0,0,0,2" />
-                    <TextBox Text="{Binding PreholidayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" BorderBrush="Transparent" />
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="10" Grid.Column="1" Grid.Row="2">
+                <TextBlock Text="Предпраздн. раб. день" FontWeight="DemiBold" FontFamily="Verdana" Foreground="{DynamicResource PreHolidayColorSolidBrush}" Margin="0,0,0,2" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="С" FontFamily="Verdana" Margin="0,3,5,0" Foreground="{DynamicResource PreHolidayColorSolidBrush}" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding PreholidayStartTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" Height="18" BorderBrush="Transparent" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,5,5">
+                        <TextBlock Text="до" FontFamily="Verdana" Margin="0,3,5,0" Foreground="{DynamicResource PreHolidayColorSolidBrush}" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding PreholidayEndTime, Mode=TwoWay, Converter={Converters:StringToTimeSpanConverter}}" Width="50" Height="18" BorderBrush="Transparent" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
+
+            
         </StackPanel>
 
-        <Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Margin="5" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5">
+            <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150" Style="{DynamicResource SquareButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" Margin="5" />
+            <Button Command="{Binding ShowDialogCommand, ElementName=DependencyOpenFileDialog}" Content="Импортировать" Width="120" Margin="5" Style="{DynamicResource SquareButtonStyle}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
+            <Button Command="{Binding ShowDialogCommand, ElementName=DependencySaveFileDialog}" Content="Экспортировать" Width="120" Margin="5" Style="{DynamicResource SquareButtonStyle}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
+        </StackPanel>
+
+        <!--<Border Background="{DynamicResource GrayPanelGradientBrush}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" />
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                     Margin="5" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3">
             <Button Command="{Binding ShowDialogCommand, ElementName=DependencyOpenFileDialog}" Content="Импортировать" Width="120" Margin="0,0,0,5" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
             <Button Command="{Binding ShowDialogCommand, ElementName=DependencySaveFileDialog}" Content="Экспортировать" Width="120" Margin="0,5,0,0" Style="{DynamicResource SquareButtonStyle}"
                 HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" />
-        </StackPanel>
+        </StackPanel>-->
 
-        <Border Background="{DynamicResource VeryLightGrayVankorSolidBrush}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />
+        <!--<Border Background="{DynamicResource VeryLightGrayVankorSolidBrush}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" />-->
         <!--<StackPanel Orientation="Vertical" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                     Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="3">
             <TextBlock Text="Файл экспорта" FontFamily="Verdana" Margin="0,0,0,2" />
@@ -123,11 +137,9 @@
         </StackPanel>-->
         
 
-        <Button Command="{Binding SaveSettingsCommand}" Content="Сохранить настройки" Width="150" Style="{DynamicResource SquareButtonStyle}"
-                HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="35" Margin="10" Grid.Column="1" Grid.Row="3" />
 
-        <CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
-                  Margin="10" Grid.Column="0" Grid.Row="3" />
+        <!--<CheckBox Content="Отметить гос. праздники" IsChecked="{Binding SelectStateHoliday, Mode=TwoWay}"
+                  Margin="10" Grid.Column="0" Grid.Row="3" />-->
 
         <!--<Button Content="{x:Static Properties:Resources.Ellipsis}"  
                     Command="{Binding ShowDialogCommand, ElementName=BrowseFolderDialog}"
