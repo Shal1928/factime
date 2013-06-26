@@ -140,12 +140,62 @@
     </Style>
 
 
+
+
+
+    <!--**************-->
+    <!--*            *-->
+    <!--*   TextBox  *-->
+    <!--*            *-->
+    <!--*******V******-->
+
+    <Style x:Key="TextBoxTimeStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="FontSize" Value="11" />
+
+        <Setter Property="BorderBrush" Value="Transparent" />
+        
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="18" />
+
+        <Setter Property="Template" Value="{DynamicResource TextBoxHidedTempalte}" />
+    </Style>
+
+    <Style x:Key="TextBoxPreHolidayTimeStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxTimeStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
+    </Style>
+
+
+
+
+
     <!--****************-->
     <!--*              *-->
     <!--*   TextBlock  *-->
     <!--*              *-->
     <!--*******V********-->
 
+    <Style x:Key="TextBlockDefaultStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="FontSize" Value="11" />
+
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>    
+
+    <Style x:Key="TextBlockTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />   
+    </Style>
+
+    <Style x:Key="TextBlockPreHolidayDefaultStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
+    </Style>
+    
+    <Style x:Key="TextBlockPreHolidayTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockPreHolidayDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+    
+    
     <!--***   Base TextBlockPresenterStyle ***-->
     <Style x:Key="TextPresenterBase" TargetType="{x:Type TextBlock}">
         <Setter Property="Text" Value="{Binding Date, StringFormat=dd}" />
@@ -440,7 +490,10 @@
         <GradientStop Color="{StaticResource GrayVankor}" Offset="1"/>
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="PressedGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#33000000" Offset="0"/>
+        <GradientStop Color="#33000000" Offset="1"/>
+    </LinearGradientBrush>
 
-    
-    
+
 </ResourceDictionary>

@@ -3,7 +3,8 @@
                     xmlns:Behaviors="clr-namespace:Factime.Behaviors"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:Converters="clr-namespace:Factime.Converters" 
-                    xmlns:Models="clr-namespace:Factime.Models">
+                    xmlns:Models="clr-namespace:Factime.Models"
+                    xmlns:Actions="clr-namespace:UseAbilities.WPF.Actions;assembly=UseAbilities.WPF">
 
     <!--<x:Array x:Key="ConverterParametrForHoliday" Type="{x:Type Models:DayType}">
         <x:Static Member="Models:DayType.Workday" />
@@ -18,12 +19,66 @@
         <x:Static Member="Models:DayType.Holiday" />
     </x:Array>-->
 
-    <ControlTemplate x:Key="YearDatePickerTemplate" TargetType="{x:Type DatePicker}">
-        <TextBox Width="60" TextAlignment="Center" x:Name="PART_TextBox"
-                            Text="{Binding Path=SelectedDate, StringFormat='MM yy', RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, FallbackValue='-- --'}" />
+    <!--TextBox Template-->
+    
+    <ControlTemplate x:Key="TextBoxHidedTempalte" TargetType="{x:Type TextBox}">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <Storyboard>
+                            <ColorAnimation To="Transparent" Storyboard.TargetName="BrBrush0" Storyboard.TargetProperty="Color" Duration="0:0:0.2" />
+                            <ColorAnimation To="Transparent" Storyboard.TargetName="BrBrush1" Storyboard.TargetProperty="Color" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </VisualState>
+
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimation To="#22000000" Storyboard.TargetName="BrBrush0" Storyboard.TargetProperty="Color" Duration="0:0:0.2" />
+                            <ColorAnimation To="#33000000" Storyboard.TargetName="BrBrush1" Storyboard.TargetProperty="Color" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <ColorAnimation To="#11000000" Storyboard.TargetName="BrBrush0" Storyboard.TargetProperty="Color" Duration="0:0:0" />
+                            <ColorAnimation To="#22000000" Storyboard.TargetName="BrBrush1" Storyboard.TargetProperty="Color" Duration="0:0:0.07" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="Chrome" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" SnapsToDevicePixels="true">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop x:Name="BrBrush0" Color="Transparent" Offset="0"/>
+                        <GradientStop x:Name="BrBrush1" Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" 
+                             FontFamily="{TemplateBinding FontFamily}" BorderBrush="{TemplateBinding BorderBrush}"
+                             FontSize="{TemplateBinding FontSize}" Grid.Column="0" Grid.Row="0" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#ADADAD"/>
+            </Trigger>
+            
+        </ControlTemplate.Triggers>
     </ControlTemplate>
-    
-    
+
+
     <DataTemplate x:Key="DefaultDataGridDataTemplate">
         <Grid Style="{DynamicResource DefaultGridCellTemplate}">
             <Grid.ColumnDefinitions>
