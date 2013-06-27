@@ -133,14 +133,29 @@ namespace Factime.Models
             return GetDaysByType(DayType.Holiday);
         }
 
+        public List<CalendarDay> GetHolidays(int year)
+        {
+            return GetDaysByType(DayType.Holiday).Where(d => d.Date.Year == year).ToList();
+        }
+
         public List<CalendarDay> GetPreholidays()
         {
             return GetDaysByType(DayType.PreHoliday);
         }
 
+        public List<CalendarDay> GetPreholidays(int year)
+        {
+            return GetDaysByType(DayType.PreHoliday).Where(d => d.Date.Year == year).ToList();
+        }
+
         public List<CalendarDay> GetWorkdays()
         {
             return GetDaysByType(DayType.Workday);
+        }
+
+        public List<CalendarDay> GetWorkdays(int year)
+        {
+            return GetDaysByType(DayType.Workday).Where(d => d.Date.Year == year).ToList();
         }
 
         public List<CalendarDay> GetExportDays()

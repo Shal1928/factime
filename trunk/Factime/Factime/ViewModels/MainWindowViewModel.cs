@@ -159,6 +159,48 @@ namespace Factime.ViewModels
             }
         }
 
+        private int _workdayCount;
+        public int WorkdayCount
+        {
+            get
+            {
+                return _workdayCount;
+            }
+            set
+            {
+                _workdayCount = value;
+                OnPropertyChanged(() => WorkdayCount);
+            }
+        }
+
+        private int _preholidayCount;
+        public int PreholidayCount
+        {
+            get
+            {
+                return _preholidayCount;
+            }
+            set
+            {
+                _preholidayCount = value;
+                OnPropertyChanged(() => PreholidayCount);
+            }
+        }
+
+        private int _holidayCount;
+        public int HolidayCount
+        {
+            get
+            {
+                return _holidayCount;
+            }
+            set
+            {
+                _holidayCount = value;
+                OnPropertyChanged(() => HolidayCount);
+            }
+        }
+
         #endregion
 
         
@@ -420,6 +462,14 @@ namespace Factime.ViewModels
 
             foreach (var week in distincWeekCollection)
                 week.SetStateHolidays(FactimeSettings.DefaultHolidaysCollection);
+
+
+            foreach (var weekWrapper in distincWeekCollection)
+            {
+                HolidayCount = HolidayCount + weekWrapper.GetHolidays(SelectedYear).Count;
+                PreholidayCount = PreholidayCount + weekWrapper.GetPreholidays(SelectedYear).Count;
+                WorkdayCount = WorkdayCount + weekWrapper.GetWorkdays(SelectedYear).Count;
+            }
 
             UpdateWeekCollections(distincWeekCollection);
         }
