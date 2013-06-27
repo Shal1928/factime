@@ -58,20 +58,20 @@
 
     <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Visibility" Value="Hidden" />
-        <Setter Property="Content" Value="Вых." />
+        <Setter Property="Content" Value="Вых" />
         <Setter Property="Margin" Value="5,5,5,3" />
         <Setter Property="Grid.Row" Value="0" />
     </Style>
     <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Width" Value="32" />
-        <Setter Property="Content" Value="Пред." />
+        <Setter Property="Content" Value="Пред" />
         <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Grid.Row" Value="1" />
     </Style>
     <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
         <Setter Property="Visibility" Value="Hidden" />
-        <Setter Property="Content" Value="Раб." />
+        <Setter Property="Content" Value="Раб" />
         <Setter Property="Margin" Value="5,3,5,5" />
         <Setter Property="Grid.Row" Value="2" />
     </Style>
@@ -152,7 +152,8 @@
     <Style x:Key="TextBoxTimeStyle" TargetType="{x:Type TextBox}">
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="11" />
-
+        <Setter Property="Foreground" Value="{DynamicResource WorkdayColorSolidBrush}" />
+        
         <Setter Property="BorderBrush" Value="Transparent" />
         
         <Setter Property="Width" Value="50" />
@@ -178,7 +179,8 @@
     <Style x:Key="TextBlockDefaultStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="Verdana" />
         <Setter Property="FontSize" Value="11" />
-
+        <Setter Property="Foreground" Value="{DynamicResource WorkdayColorSolidBrush}" />
+        
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>    
 
@@ -194,8 +196,15 @@
         <Setter Property="FontWeight" Value="DemiBold" />
     </Style>
 
-    
-    
+    <Style x:Key="TextBlockHolidayDefaultStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource HolidayColorSolidBrush}" />
+    </Style>
+
+    <Style x:Key="TextBlockHolidayTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockHolidayDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+
     <!--***   Base TextBlockPresenterStyle ***-->
     <Style x:Key="TextPresenterBase" TargetType="{x:Type TextBlock}">
         <Setter Property="Text" Value="{Binding Date, StringFormat=dd}" />
@@ -227,7 +236,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#ffFF6B40" />
+                <Setter Property="Foreground" Value="{DynamicResource HolidayColorSolidBrush}" />
             </MultiDataTrigger>
 
             <!--PreHoliday in current month-->
@@ -243,7 +252,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#ff086CA2" />
+                <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
             </MultiDataTrigger>
 
             <!--Workday in current month-->
@@ -259,7 +268,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#88000000" />
+                <Setter Property="Foreground" Value="{DynamicResource WorkdayColorSolidBrush}" />
             </MultiDataTrigger>
 
 
@@ -276,7 +285,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#88FF6B40" />
+                <Setter Property="Foreground" Value="{DynamicResource HolidayColorHalfSolidBrush}" />
             </MultiDataTrigger>
 
             <!--PreHoliday in another month-->
@@ -292,7 +301,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#88086CA2" />
+                <Setter Property="Foreground" Value="{DynamicResource PreHolidayHalfColorSolidBrush}" />
             </MultiDataTrigger>
 
             <!--Workday in another month-->
@@ -308,7 +317,7 @@
                         </Condition.Binding>
                     </Condition>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="#44000000" />
+                <Setter Property="Foreground" Value="{DynamicResource WorkdayColorHalfSolidBrush}" />
             </MultiDataTrigger>
         </Style.Triggers>
     </Style>
@@ -416,9 +425,19 @@
 
 
 
+
+    <Color x:Key="HolidayColor">#ffFF6B40</Color>
+    <Color x:Key="HolidayHalfColor">#88FF6B40</Color>
+    <Color x:Key="HolidayQuartColor">#33FF6B40</Color>  
+    
     <Color x:Key="PreHolidayColor">#ff086CA2</Color>
     <Color x:Key="PreHolidayHalfColor">#88086CA2</Color>
     <Color x:Key="PreHolidayQuartColor">#33086CA2</Color>
+
+    <Color x:Key="WorkdayColor">#88000000</Color>
+    <Color x:Key="WorkdayHalfColor">#44000000</Color>
+    <Color x:Key="WorkdayQuartColor">#11000000</Color>
+
     
     <Color x:Key="LightBlueVankor">#ffC3CBE5</Color>
     
@@ -450,7 +469,12 @@
     <SolidColorBrush x:Key="LightGraySolidBrush" Color="{StaticResource LightGrayVankor}" />
     <SolidColorBrush x:Key="VeryLightGrayVankorSolidBrush" Color="{StaticResource VeryLightGrayVankor}" />
 
+    <SolidColorBrush x:Key="HolidayColorSolidBrush" Color="{StaticResource HolidayColor}" />
+    <SolidColorBrush x:Key="HolidayColorHalfSolidBrush" Color="{StaticResource HolidayHalfColor}" />
     <SolidColorBrush x:Key="PreHolidayColorSolidBrush" Color="{StaticResource PreHolidayColor}" />
+    <SolidColorBrush x:Key="PreHolidayHalfColorSolidBrush" Color="{StaticResource PreHolidayHalfColor}" />
+    <SolidColorBrush x:Key="WorkdayColorSolidBrush" Color="{StaticResource WorkdayColor}" />
+    <SolidColorBrush x:Key="WorkdayColorHalfSolidBrush" Color="{StaticResource WorkdayHalfColor}" />
 
     <LinearGradientBrush x:Key="PreHolidayGradientBrush" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="{StaticResource PreHolidayQuartColor}" Offset="0"/>
