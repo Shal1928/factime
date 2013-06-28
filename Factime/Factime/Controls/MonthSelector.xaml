@@ -9,8 +9,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views\StylesDictionary.xaml" />
-                <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
+                <ResourceDictionary Source="/Views\Styles\RadioButtonStyles.xaml" />
+                <ResourceDictionary Source="/Views\Templates\OtherTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

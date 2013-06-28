@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views\Styles\Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--***   Base RadioButtonPresenterStyle ***-->
+    <Style x:Key="RadioButtonPresenter" TargetType="{x:Type RadioButton}">
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Foreground" Value="#55000000" />
+        <Setter Property="FontFamily" Value="Verdana" />
+
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template" Value="{DynamicResource LinkRadioButton}" />
+
+        <Setter Property="Grid.Column" Value="1" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Foreground" Value="#ff000000" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Foreground" Value="#ff000000" />
+                <Setter Property="Template" Value="{DynamicResource CheckedLinkRadioButton}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="HolydayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Content" Value="Вых" />
+        <Setter Property="Margin" Value="5,5,5,3" />
+        <Setter Property="Grid.Row" Value="0" />
+    </Style>
+    <Style x:Key="PreHolidayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Content" Value="Пред" />
+        <Setter Property="Margin" Value="5,0,5,0" />
+        <Setter Property="Grid.Row" Value="1" />
+    </Style>
+    <Style x:Key="WorkdayRadioButtonPresenter" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Content" Value="Раб" />
+        <Setter Property="Margin" Value="5,3,5,5" />
+        <Setter Property="Grid.Row" Value="2" />
+    </Style>
+
+    <Style x:Key="MonthRadioButtonStyle" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonPresenter}">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,157 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:Models="clr-namespace:Factime.Models"
+                    xmlns:Converters="clr-namespace:Factime.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views\Styles\Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--TextBlock Styles-->
+    <Style x:Key="TextBlockDefaultStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Verdana" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Foreground" Value="{DynamicResource WorkdayColorSolidBrush}" />
+
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TextBlockTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+    <Style x:Key="TextBlockPreHolidayDefaultStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
+    </Style>
+
+    <Style x:Key="TextBlockPreHolidayTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockPreHolidayDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+    <Style x:Key="TextBlockHolidayDefaultStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockDefaultStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource HolidayColorSolidBrush}" />
+    </Style>
+
+    <Style x:Key="TextBlockHolidayTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockHolidayDefaultStyle}">
+        <Setter Property="FontWeight" Value="DemiBold" />
+    </Style>
+
+
+    <!--***   Base TextBlockPresenterStyle ***-->
+    <Style x:Key="TextPresenterBase" TargetType="{x:Type TextBlock}">
+        <Setter Property="Text" Value="{Binding Date, StringFormat=dd}" />
+
+        <Setter Property="FontSize" Value="28" />
+
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
+
+        <!--<Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.RowSpan" Value="3" />-->
+    </Style>
+
+    <Style x:Key="TextPresenter" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextPresenterBase}">
+
+        <Style.Triggers>
+            <!--Holiday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource HolidayColorSolidBrush}" />
+            </MultiDataTrigger>
+
+            <!--PreHoliday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
+            </MultiDataTrigger>
+
+            <!--Workday in current month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}" />
+                    <Condition Value="True">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource WorkdayColorSolidBrush}" />
+            </MultiDataTrigger>
+
+
+            <!--Holiday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Holiday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource HolidayColorHalfSolidBrush}" />
+            </MultiDataTrigger>
+
+            <!--PreHoliday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.PreHoliday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource PreHolidayHalfColorSolidBrush}" />
+            </MultiDataTrigger>
+
+            <!--Workday in another month-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Type}" Value="{x:Static Models:DayType.Workday}" />
+                    <Condition Value="False">
+                        <Condition.Binding>
+                            <MultiBinding Converter="{Converters:CompareConditionMultiConverter}">
+                                <Binding Path="DataContext.SelectedMonth" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" />
+                                <Binding Path="Date" Converter="{Converters:ExtractMonthConverter}" />
+                            </MultiBinding>
+                        </Condition.Binding>
+                    </Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource WorkdayColorHalfSolidBrush}" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

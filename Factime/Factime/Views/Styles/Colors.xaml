@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="HolidayColor">#ffFF6B40</Color>
+    <Color x:Key="HolidayHalfColor">#88FF6B40</Color>
+    <Color x:Key="HolidayQuartColor">#33FF6B40</Color>
+
+    <Color x:Key="PreHolidayColor">#ff086CA2</Color>
+    <Color x:Key="PreHolidayHalfColor">#88086CA2</Color>
+    <Color x:Key="PreHolidayQuartColor">#33086CA2</Color>
+
+    <Color x:Key="WorkdayColor">#88000000</Color>
+    <Color x:Key="WorkdayHalfColor">#44000000</Color>
+    <Color x:Key="WorkdayQuartColor">#11000000</Color>
+
+
+    <Color x:Key="LightBlueVankor">#ffC3CBE5</Color>
+
+    <Color x:Key="DarkBlueVankor">#ff233B8A</Color>
+
+    <Color x:Key="YellowVankor">#ffFAD500</Color>
+
+    <Color x:Key="PinkVankor">#ffF9EEB0</Color>
+
+    <Color x:Key="DarkGrayVankor">#ff777777</Color>
+    <Color x:Key="GrayVankor">#ffAAAAAA</Color>
+    <Color x:Key="LightGrayVankor">#ffBBBBBB</Color>
+    <Color x:Key="MediumLightGrayVankor">#ffDDDDDD</Color>
+    <Color x:Key="VeryLightGrayVankor">#ffEEEEEE</Color>
+
+
+    <!--<GradientStop Color="#ffEEEEEE" Offset="0"/>
+    <GradientStop Color="#ffDDDDDD" Offset="0.75"/>
+    <GradientStop Color="#ffAAAAAA" Offset="1"/>-->
+
+    <SolidColorBrush x:Key="LightBlueSolidBrush" Color="{StaticResource LightBlueVankor}" />
+
+    <SolidColorBrush x:Key="YellowSolidBrush" Color="{StaticResource YellowVankor}" />
+    <SolidColorBrush x:Key="PinkSolidBrush" Color="{StaticResource PinkVankor}" />
+
+    <SolidColorBrush x:Key="GrayVankorSolidBrush" Color="{StaticResource GrayVankor}" />
+    <SolidColorBrush x:Key="GraySolidBrush" Color="{StaticResource DarkGrayVankor}" />
+    <SolidColorBrush x:Key="LinkOverSolidBrush" Color="#ff000000" />
+    <SolidColorBrush x:Key="LightGraySolidBrush" Color="{StaticResource LightGrayVankor}" />
+    <SolidColorBrush x:Key="VeryLightGrayVankorSolidBrush" Color="{StaticResource VeryLightGrayVankor}" />
+
+    <SolidColorBrush x:Key="HolidayColorSolidBrush" Color="{StaticResource HolidayColor}" />
+    <SolidColorBrush x:Key="HolidayColorHalfSolidBrush" Color="{StaticResource HolidayHalfColor}" />
+    <SolidColorBrush x:Key="PreHolidayColorSolidBrush" Color="{StaticResource PreHolidayColor}" />
+    <SolidColorBrush x:Key="PreHolidayHalfColorSolidBrush" Color="{StaticResource PreHolidayHalfColor}" />
+    <SolidColorBrush x:Key="WorkdayColorSolidBrush" Color="{StaticResource WorkdayColor}" />
+    <SolidColorBrush x:Key="WorkdayColorHalfSolidBrush" Color="{StaticResource WorkdayHalfColor}" />
+
+    <LinearGradientBrush x:Key="PreHolidayGradientBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource PreHolidayQuartColor}" Offset="0"/>
+        <GradientStop Color="{StaticResource PreHolidayHalfColor}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource PreHolidayColor}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MouseOverGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="{StaticResource PinkVankor}" Offset="0" />
+            <GradientStop Color="{StaticResource YellowVankor}" Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HighlightItemGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#ffFFFFFF" Offset="0" />
+            <GradientStop Color="{StaticResource PinkVankor}" Offset="0.75" />
+            <GradientStop Color="{StaticResource YellowVankor}" Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GridHeaderGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#ffFFFFFF" Offset="0"/>
+        <GradientStop Color="{StaticResource YellowVankor}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource YellowVankor}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DoubleGrayPanelGradientBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource VeryLightGrayVankor}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource MediumLightGrayVankor}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GrayPanelGradientBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="{StaticResource VeryLightGrayVankor}" Offset="0"/>
+        <GradientStop Color="{StaticResource MediumLightGrayVankor}" Offset="0.75"/>
+        <GradientStop Color="{StaticResource GrayVankor}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PressedGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#33000000" Offset="0"/>
+        <GradientStop Color="#33000000" Offset="1"/>
+    </LinearGradientBrush>
+    
+</ResourceDictionary>
