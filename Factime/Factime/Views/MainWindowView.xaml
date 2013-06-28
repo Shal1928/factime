@@ -14,8 +14,12 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Views\StylesDictionary.xaml" />
-                <ResourceDictionary Source="/Views\TemplatesDictionary.xaml" />
+                <ResourceDictionary Source="/Views\Styles\OtherStyles.xaml" />
+                <ResourceDictionary Source="/Views\Styles\TextBlockStyles.xaml" />
+                <ResourceDictionary Source="/Views\Styles\TextBoxStyles.xaml" />
+                <ResourceDictionary Source="/Views\Styles\RadioButtonStyles.xaml" />
+                <ResourceDictionary Source="/Views\Styles\DataGridStyles.xaml" />
+                <ResourceDictionary Source="/Views\Templates\OtherTemplates.xaml" />
                 <ResourceDictionary Source="/UseAbilities.Visual;component/Styles\Controls\Buttons\SquareButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -25,6 +29,10 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
             <Actions:SetPropertyAction Property="SizeToContent" Value="WidthAndHeight" />
+        </i:EventTrigger>
+        <!--{Binding ElementName=HolidayRadioButton}-->
+        <i:EventTrigger SourceObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" EventName="LostFocus">
+            <i:InvokeCommandAction Command="{Binding UpdateCountsCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -65,6 +73,7 @@
                 <Controls:DataGridTemplateColumnExt Binding="{Binding Sunday}" CellTemplate="{StaticResource DefaultDataGridDataTemplate}" Header="Вс" Width="SizeToCells" IsReadOnly="True" />
             </DataGrid.Columns>
 
+            <!--UpdateCountsCommand-->
         </DataGrid>
 
         <!--<Border Background="{DynamicResource DoubleGrayPanelGradientBrush}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" />-->
@@ -108,20 +117,23 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"
                         Margin="25,10,10,10" Grid.Column="1" Grid.Row="2">
-                <TextBlock Text="Количество дней" Style="{DynamicResource TextBlockTitleStyle}" Margin="0,0,0,2" />
-                <StackPanel Orientation="Horizontal" Margin="0,5,5,5">
-                    <TextBlock Text="Вых: " Style="{DynamicResource TextBlockHolidayDefaultStyle}" Margin="0,3,0,0" />
-                    <TextBlock Text="{Binding HolidayCount}" Style="{DynamicResource TextBlockHolidayDefaultStyle}" Margin="0,3,5,0" />
-
-                    <TextBlock Text="Пред: " Style="{DynamicResource TextBlockPreHolidayDefaultStyle}" Margin="10,3,0,0" />
-                    <TextBlock Text="{Binding PreholidayCount}" Style="{DynamicResource TextBlockPreHolidayDefaultStyle}" Margin="0,3,5,0" />
-                    
-                    <TextBlock Text="Раб: " Style="{DynamicResource TextBlockDefaultStyle}" Margin="10,3,0,0" />
-                    <TextBlock Text="{Binding WorkdayCount}" Style="{DynamicResource TextBlockDefaultStyle}" Margin="0,3,5,0" />
+                <!--<TextBlock Text="Количество дней" Style="{DynamicResource TextBlockTitleStyle}" Margin="0,0,0,2" />-->
+                <StackPanel Orientation="Vertical" Margin="0,0,5,5">
+                    <TextBlock Text="Рабочих" Style="{DynamicResource TextBlockTitleStyle}" Margin="0,3,0,0" />
+                    <TextBlock Text="{Binding WorkdayCount}" Style="{DynamicResource TextBlockDefaultStyle}" Margin="0,8,5,0" />
                 </StackPanel>
 
+                <StackPanel Orientation="Vertical" Margin="10,0,5,5">
+                    <TextBlock Text="Предпраздн." Style="{DynamicResource TextBlockPreHolidayTitleStyle}" Margin="0,3,0,0" />
+                    <TextBlock Text="{Binding PreholidayCount}" Style="{DynamicResource TextBlockPreHolidayDefaultStyle}" Margin="0,8,5,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="8,0,5,5">
+                    <TextBlock Text="Выходных" Style="{DynamicResource TextBlockHolidayTitleStyle}" Margin="0,3,0,0" />
+                    <TextBlock Text="{Binding HolidayCount}" Style="{DynamicResource TextBlockHolidayDefaultStyle}" Margin="0,8,5,0" />
+                </StackPanel>
             </StackPanel>
 
         </StackPanel>
