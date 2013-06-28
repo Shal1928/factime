@@ -62,7 +62,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBox Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" 
+                    <TextBox Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" Style="{DynamicResource TextBoxUnderlineStyle}"
                              FontFamily="{TemplateBinding FontFamily}" BorderBrush="{TemplateBinding BorderBrush}"
                              FontSize="{TemplateBinding FontSize}" Grid.Column="0" Grid.Row="0" />
                 </Grid>
@@ -74,9 +74,9 @@
                 <Setter Property="Foreground" Value="#ADADAD"/>
             </Trigger>
             
+            
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
 
     <DataTemplate x:Key="DefaultDataGridDataTemplate">
         <Grid Style="{DynamicResource DefaultGridCellTemplate}">

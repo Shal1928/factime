@@ -22,4 +22,27 @@
     <Style x:Key="TextBoxPreHolidayTimeStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxTimeStyle}">
         <Setter Property="Foreground" Value="{DynamicResource PreHolidayColorSolidBrush}" />
     </Style>
+
+    <Style x:Key="TextBoxUnderlineStyle" TargetType="{x:Type TextBox}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="TextDecorations">
+                    <Setter.Value>
+                        <TextDecorationCollection>
+                            <TextDecoration Location="Underline" PenThicknessUnit="FontRecommended">
+                                <TextDecoration.Pen>
+                                    <Pen Brush="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" Thickness="0.5" LineJoin="Round" StartLineCap="Round" EndLineCap="Round" DashCap="Round">
+                                        <Pen.DashStyle>
+                                            <DashStyle Dashes="5" />
+                                        </Pen.DashStyle>
+                                    </Pen>
+                                </TextDecoration.Pen>
+                            </TextDecoration>
+                        </TextDecorationCollection>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
