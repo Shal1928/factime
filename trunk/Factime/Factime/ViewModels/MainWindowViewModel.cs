@@ -382,13 +382,15 @@ namespace Factime.ViewModels
             UpdateWorkTime(DayType.PreHoliday, PreholidayEndTime, false);
         }
 
-        private void UpdateWeekCollections(List<WeekWrapper> weekCollection)
+        private void UpdateWeekCollections(IEnumerable<WeekWrapper> weekCollection)
         {
             var view = CollectionViewSource.GetDefaultView(weekCollection);
             if (view == null) return;
             view.Filter = FilterPredicate;
 
             WeekCollection = view;
+
+            OnUpdateCountsCommand();
         }
 
         private void UpdateFilterWeekCollections()
@@ -464,12 +466,12 @@ namespace Factime.ViewModels
                 week.SetStateHolidays(FactimeSettings.DefaultHolidaysCollection);
 
 
-            foreach (var weekWrapper in distincWeekCollection)
-            {
-                HolidayCount = HolidayCount + weekWrapper.GetHolidays(SelectedYear).Count;
-                PreholidayCount = PreholidayCount + weekWrapper.GetPreholidays(SelectedYear).Count;
-                WorkdayCount = WorkdayCount + weekWrapper.GetWorkdays(SelectedYear).Count;
-            }
+            //foreach (var weekWrapper in distincWeekCollection)
+            //{
+            //    HolidayCount = HolidayCount + weekWrapper.GetHolidays(SelectedYear).Count;
+            //    PreholidayCount = PreholidayCount + weekWrapper.GetPreholidays(SelectedYear).Count;
+            //    WorkdayCount = WorkdayCount + weekWrapper.GetWorkdays(SelectedYear).Count;
+            //}
 
             UpdateWeekCollections(distincWeekCollection);
         }
@@ -551,6 +553,29 @@ namespace Factime.ViewModels
         {
             FileName = filename;
             OnImportCommand();
+        }
+
+        private ICommand _updateCountsCommand;
+        public ICommand UpdateCountsCommand
+        {
+            get
+            {
+                return _updateCountsCommand ?? (_updateCountsCommand = new RelayCommand(param => OnUpdateCountsCommand(), null));
+            }
+        }
+
+        private void OnUpdateCountsCommand()
+        {
+            HolidayCount = 0;
+            PreholidayCount = 0;
+            WorkdayCount = 0;
+
+            foreach (WeekWrapper weekWrapper in WeekCollection.SourceCollection)
+            {
+                HolidayCount = HolidayCount + weekWrapper.GetHolidays(SelectedYear).Count;
+                PreholidayCount = PreholidayCount + weekWrapper.GetPreholidays(SelectedYear).Count;
+                WorkdayCount = WorkdayCount + weekWrapper.GetWorkdays(SelectedYear).Count;
+            }
         }
 
         #endregion
