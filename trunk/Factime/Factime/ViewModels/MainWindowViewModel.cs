@@ -391,6 +391,8 @@ namespace Factime.ViewModels
             WeekCollection = view;
 
             OnUpdateCountsCommand();
+
+            FileName = string.Format("Производственный календарь на {0} год", SelectedYear);
         }
 
         private void UpdateFilterWeekCollections()

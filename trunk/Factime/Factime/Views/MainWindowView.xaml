@@ -7,6 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Actions="clr-namespace:UseAbilities.WPF.Actions;assembly=UseAbilities.WPF"
         xmlns:Dialogs="clr-namespace:UseAbilities.Controls.Dialogs;assembly=UseAbilities.Controls"
+        Icon="/Factime;component/Images/Cal.ico"
         Title="Factime" 
         MinWidth="729" MaxWidth="729" MinHeight="500"
         Width="729" Height="Auto">
@@ -145,12 +146,12 @@
         
 
         <Dialogs:DependencySaveFileDialog Title="Экспортировать производственный календарь" x:Name="DependencySaveFileDialog" AddExtension="True" DefaultExt="txt" 
-                                                  Filter="Текстовые файлы (*.txt)|*.txt;|Все файлы (*.*)|*.*"
-                                                  FileOkCommand="{Binding FileExportCommand}" InitialDirectory="Рабочий стол" />
+                                                  Filter="Текстовые файлы (*.txt)|*.txt;|Все файлы (*.*)|*.*" FileName="{Binding FileName, Mode=TwoWay}"
+                                                  FileOkCommand="{Binding FileExportCommand}" />
 
         <Dialogs:DependencyOpenFileDialog Title="Импортировать производственный календарь" x:Name="DependencyOpenFileDialog" AddExtension="True" DefaultExt="txt" 
                                                   Filter="Текстовые файлы (*.txt)|*.txt;|Все файлы (*.*)|*.*"
-                                                  FileOkCommand="{Binding FileImportCommand}" InitialDirectory="Рабочий стол" />
+                                                  FileOkCommand="{Binding FileImportCommand}" />
 
     </Grid>
 </Base:ViewBase>
