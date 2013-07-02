@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using Factime.Models;
@@ -324,7 +327,7 @@ namespace Factime.ViewModels
                 Type = DayType.Holiday
             };
 
-            if (CalendarDayCollection != null && _isImporting)
+            if (_isImporting && CalendarDayCollection != null)
             {
                 var weeks = CalendarDay.ToList(CalendarDayCollection);
                 var holidayCollection = new List<DateTime>();
@@ -435,7 +438,10 @@ namespace Factime.ViewModels
 
             foreach (WeekWrapper week in WeekCollection)
                 FactimeSettings.DefaultHolidaysCollection.AddRange(week.GetStateHolidays().Select(day=> day.Date));
-            
+
+            var applicationDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (!string.IsNullOrEmpty(applicationDir)) FactimeSettingsStore.FileName = Path.Combine(applicationDir, FactimeSettingsStore.FileName);
+
             FactimeSettingsStore.Save(FactimeSettings);
 
             WeekCollection.Filter = filter;
@@ -522,6 +528,7 @@ namespace Factime.ViewModels
 
             CalendarDayStore.FileName = FileName;
             CalendarDayStore.Save(exportCalendarDayCollection);
+            var a = FactimeSettingsStore;
 
             WeekCollection.Filter = filter;
         }
