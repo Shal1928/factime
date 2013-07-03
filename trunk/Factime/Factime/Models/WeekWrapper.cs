@@ -8,52 +8,108 @@ namespace Factime.Models
     {
         public WeekWrapper(int curentMonth)
         {
-            CurrentMonth = curentMonth;
+            CurrentMonth = curentMonth;           
         }
 
 
         #region Public Properties
 
+        private CalendarDay _monday;
         public CalendarDay Monday
         {
-            get;
-            set;
+            get
+            {
+                return _monday;
+            }
+            set
+            {
+                _monday = value;
+                _monday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _tuesday;
         public CalendarDay Tuesday
         {
-            get;
-            set;
+            get
+            {
+                return _tuesday;
+            }
+            set
+            {
+                _tuesday = value;
+                _tuesday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _wednesday;
         public CalendarDay Wednesday
         {
-            get;
-            set;
+            get
+            {
+                return _wednesday;
+            }
+            set
+            {
+                _wednesday = value;
+                _wednesday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _thursday;
         public CalendarDay Thursday
         {
-            get;
-            set;
+            get
+            {
+                return _thursday;
+            }
+            set
+            {
+                _thursday = value;
+                _thursday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _friday;
         public CalendarDay Friday
         {
-            get;
-            set;
+            get
+            {
+                return _friday;
+            }
+            set
+            {
+                _friday = value;
+                _friday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _saturday;
         public CalendarDay Saturday
         {
-            get;
-            set;
+            get
+            {
+                return _saturday;
+            }
+            set
+            {
+                _saturday = value;
+                _saturday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
+        private CalendarDay _sunday;
         public CalendarDay Sunday
         {
-            get;
-            set;
+            get
+            {
+                return _sunday;
+            }
+            set
+            {
+                _sunday = value;
+                _sunday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+            }
         }
 
         public int CurrentMonth
@@ -179,6 +235,7 @@ namespace Factime.Models
 
         #region Set Day/s Public Methods
 
+        //TODO: EventListner for detected
         public void SetStateHolidays(List<DateTime> stateHolidaysDateCollection)
         {
             foreach (var stateHolidayDate in stateHolidaysDateCollection)
