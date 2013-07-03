@@ -1,8 +1,9 @@
 ﻿using System;
+using UseAbilities.MVVM.Base;
 
 namespace Factime.Models
 {
-    public abstract class CalendarDayBase
+    public abstract class CalendarDayBase : ObserveProperty
     {
         private DateTime _date;
         public virtual DateTime Date
@@ -17,10 +18,18 @@ namespace Factime.Models
             }
         }
 
+        private DayType _type;
         public virtual DayType Type
         {
-            get; 
-            set;
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                _type = value;
+                OnPropertyChanged(()=> Type);
+            }
         }
 
         private bool _isStateHoliday;
@@ -34,7 +43,16 @@ namespace Factime.Models
             {
                 _isStateHoliday = value;
                 Type = value ? DayType.Holiday : DayType.Workday;
+                OnStateHolidayChanged(EventArgs.Empty);
             }
+        }
+
+        public event EventHandler StateHolidayChanged;
+
+        public void OnStateHolidayChanged(EventArgs e)
+        {
+            var handler = StateHolidayChanged;
+            if (handler != null) handler(this, e);
         }
     }
 }
