@@ -24,7 +24,7 @@ namespace Factime.Models
             set
             {
                 _monday = value;
-                _monday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _monday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Factime.Models
             set
             {
                 _tuesday = value;
-                _tuesday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _tuesday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Factime.Models
             set
             {
                 _wednesday = value;
-                _wednesday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _wednesday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Factime.Models
             set
             {
                 _thursday = value;
-                _thursday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _thursday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -80,7 +80,7 @@ namespace Factime.Models
             set
             {
                 _friday = value;
-                _friday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _friday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Factime.Models
             set
             {
                 _saturday = value;
-                _saturday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _saturday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -108,7 +108,7 @@ namespace Factime.Models
             set
             {
                 _sunday = value;
-                _sunday.StateHolidayChanged += (sender, e) => SetPreHolidays();
+                _sunday.StateHolidayChanged += (sender, e) => SetPreHolidays(e);
             }
         }
 
@@ -235,7 +235,6 @@ namespace Factime.Models
 
         #region Set Day/s Public Methods
 
-        //TODO: EventListner for detected
         public void SetStateHolidays(List<DateTime> stateHolidaysDateCollection)
         {
             foreach (var stateHolidayDate in stateHolidaysDateCollection)
@@ -247,23 +246,34 @@ namespace Factime.Models
             SetPreHolidays();
         }
 
-        public void SetPreHolidays()
+        public void SetPreHolidays(EventArgs e = null)
         {
+            var targetDayType = DayType.PreHoliday;
+            var stateHolidayPredicate = true;
+
+            var valueChangedEventArgs = e as ValueChangedEventArgs;
+            if (valueChangedEventArgs != null && (bool)valueChangedEventArgs.OldValue && !(bool)valueChangedEventArgs.NewValue)
+            {
+                stateHolidayPredicate = false;
+                targetDayType = DayType.Workday;
+            }
+                
             //foreach (var calendarDay in GetAllDaysCollection<CalendarDay>())
             //{
-            //    if (!calendarDay.IsStateHoliday) continue;
+            //    if (calendarDay.IsStateHoliday != stateHolidayPredicate) continue;
 
             //    var cDay = GetDayByDate(calendarDay.Date.AddDays(-1));
-            //    if (cDay != null && cDay.Type != DayType.Holiday) cDay.Type = DayType.PreHoliday;
+            //    if (cDay != null && cDay.Type != DayType.Holiday) cDay.Type = targetDayType;
             //}
+
             foreach (var cDay in
                               from calendarDay in GetAllDaysCollection<CalendarDay>()
-                              where calendarDay.IsStateHoliday
+                              where calendarDay.IsStateHoliday == stateHolidayPredicate
                               select GetDayByDate(calendarDay.Date.AddDays(-1))
                                   into cDay
                                   where cDay != null && cDay.Type != DayType.Holiday
                                   select cDay)
-                cDay.Type = DayType.PreHoliday;
+                cDay.Type = targetDayType;
 
         }
 
