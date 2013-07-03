@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using UseAbilities.MVVM.Base;
 
 namespace Factime.Models
@@ -41,18 +42,31 @@ namespace Factime.Models
             }
             set
             {
+                var oldValue = _isStateHoliday;
                 _isStateHoliday = value;
                 Type = value ? DayType.Holiday : DayType.Workday;
-                OnStateHolidayChanged(EventArgs.Empty);
+                OnStateHolidayChanged(new ValueChangedEventArgs(oldValue, value));
             }
         }
 
         public event EventHandler StateHolidayChanged;
 
-        public void OnStateHolidayChanged(EventArgs e)
+        public void OnStateHolidayChanged(ValueChangedEventArgs e)
         {
             var handler = StateHolidayChanged;
             if (handler != null) handler(this, e);
         }
+    }
+
+    public class ValueChangedEventArgs : EventArgs
+    {
+        public ValueChangedEventArgs(object oldValue, object newValue)
+        {
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+
+        public readonly object OldValue;
+        public readonly object NewValue;
     }
 }
