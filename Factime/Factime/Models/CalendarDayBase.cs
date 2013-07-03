@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Design;
+using UseAbilities.DotNet.EventArguments;
 using UseAbilities.MVVM.Base;
 
 namespace Factime.Models
@@ -56,17 +56,5 @@ namespace Factime.Models
             var handler = StateHolidayChanged;
             if (handler != null) handler(this, e);
         }
-    }
-
-    public class ValueChangedEventArgs : EventArgs
-    {
-        public ValueChangedEventArgs(object oldValue, object newValue)
-        {
-            OldValue = oldValue;
-            NewValue = newValue;
-        }
-
-        public readonly object OldValue;
-        public readonly object NewValue;
     }
 }

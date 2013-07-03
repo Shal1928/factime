@@ -165,6 +165,10 @@
       <Project>{430AC6DC-ABB3-40AD-8960-9DE701320537}</Project>
       <Name>UseAbilities.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UseAbilities\UseAbilities.DotNet\UseAbilities.DotNet.csproj">
+      <Project>{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}</Project>
+      <Name>UseAbilities.DotNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UseAbilities\UseAbilities.Extensions\UseAbilities.Extensions.csproj">
       <Project>{C3286D0A-9826-4681-AB99-E0056239D253}</Project>
       <Name>UseAbilities.Extensions</Name>
