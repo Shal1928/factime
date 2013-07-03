@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseAbilities.Visual", "..\U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseAbilities.Controls", "..\UseAbilities\UseAbilities.Controls\UseAbilities.Controls.csproj", "{430AC6DC-ABB3-40AD-8960-9DE701320537}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseAbilities.DotNet", "..\UseAbilities\UseAbilities.DotNet\UseAbilities.DotNet.csproj", "{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -127,6 +129,16 @@ Global
 		{430AC6DC-ABB3-40AD-8960-9DE701320537}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{430AC6DC-ABB3-40AD-8960-9DE701320537}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{430AC6DC-ABB3-40AD-8960-9DE701320537}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,5 +153,6 @@ Global
 		{C3286D0A-9826-4681-AB99-E0056239D253} = {A48411FB-AF06-4334-BAF0-9F006F7B42FB}
 		{9267C3C2-5D30-45CD-ABF0-27E262E7EC58} = {A48411FB-AF06-4334-BAF0-9F006F7B42FB}
 		{430AC6DC-ABB3-40AD-8960-9DE701320537} = {A48411FB-AF06-4334-BAF0-9F006F7B42FB}
+		{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3} = {A48411FB-AF06-4334-BAF0-9F006F7B42FB}
 	EndGlobalSection
 EndGlobal
