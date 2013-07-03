@@ -152,13 +152,13 @@ namespace Factime.Models
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(this, other)) return true;
 
-            return Monday.Date.Equals(other.Monday.Date) && //Monday.IsStateHoliday.Equals(other.Monday.IsStateHoliday) &&
-                   Tuesday.Date.Equals(other.Tuesday.Date) && //Tuesday.IsStateHoliday.Equals(other.Tuesday.IsStateHoliday) &&
-                   Wednesday.Date.Equals(other.Wednesday.Date) && //Wednesday.IsStateHoliday.Equals(other.Wednesday.IsStateHoliday) &&
-                   Thursday.Date.Equals(other.Thursday.Date) && //Thursday.IsStateHoliday.Equals(other.Thursday.IsStateHoliday) &&
-                   Friday.Date.Equals(other.Friday.Date) && //Friday.IsStateHoliday.Equals(other.Friday.IsStateHoliday) &&
-                   Saturday.Date.Equals(other.Saturday.Date) && //Saturday.IsStateHoliday.Equals(other.Saturday.IsStateHoliday) &&
-                   Sunday.Date.Equals(other.Sunday.Date);// && Sunday.IsStateHoliday.Equals(other.Sunday.IsStateHoliday);
+            return Monday.Date.Equals(other.Monday.Date) && 
+                   Tuesday.Date.Equals(other.Tuesday.Date) && 
+                   Wednesday.Date.Equals(other.Wednesday.Date) && 
+                   Thursday.Date.Equals(other.Thursday.Date) && 
+                   Friday.Date.Equals(other.Friday.Date) && 
+                   Saturday.Date.Equals(other.Saturday.Date) && 
+                   Sunday.Date.Equals(other.Sunday.Date);
         }
 
         #endregion
