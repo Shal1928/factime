@@ -33,6 +33,11 @@ namespace TestConsoleApplication
                 _stringProperty = value;
             }
         }
+
+        public void ConsoleWriteln()
+        {
+            Console.WriteLine("Console");
+        }
     }
 
     //// The object of this code example is to emit code equivalent to 
@@ -65,6 +70,8 @@ namespace TestConsoleApplication
             ModuleBuilder mb = ab.DefineDynamicModule(name, name + ".dll");
 
             TypeBuilder tb = mb.DefineType("C", TypeAttributes.Public, typeof(A));
+
+
             tb.AddInterfaceImplementation(typeof(I));
 
             // Build the method body for the explicit interface  
@@ -150,7 +157,7 @@ namespace TestConsoleApplication
             //targetProperty2.Invoke(test, new[] {"1"});
 
             test.StringProperty = "1";
-
+            test.ConsoleWriteln();
             Console.ReadLine();
         }
     }
