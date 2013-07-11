@@ -8,6 +8,7 @@ using Factime.Views;
 using UseAbilities.IoC.Core;
 using UseAbilities.IoC.Helpers;
 using UseAbilities.IoC.Stores;
+using UseAbilities.MVVM.Base;
 using UseAbilities.MVVM.Managers;
 
 namespace Factime
@@ -19,24 +20,29 @@ namespace Factime
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Loader(StaticHelper.IoCcontainer);
+            
+            //var startupWindow = new MainWindowViewModel(); //StaticHelper.IoCcontainer.Resolve<MainWindowViewModel>();
+
+            //var mainVM = StaticHelper.IoCcontainer.Resolve(startupWindow.GetType());
+            var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(ObserveWrapper.Wrap(typeof(MainWindowViewModel)));
+            //var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(typeof(MainWindowViewModel));
+
             var relationsViewToViewModel = new Dictionary<Type, Type>
                                          {
-                                            {typeof (MainWindowViewModel), typeof (MainWindowView)}
+                                            {startupWindowSeed.GetType(), typeof (MainWindowView)}
                                          };
 
             ViewManager.RegisterViewViewModelRelations(relationsViewToViewModel);
             ViewModelManager.ActiveViewModels.CollectionChanged += ViewManager.OnViewModelsCoolectionChanged;
 
-            Loader(StaticHelper.IoCcontainer);
-
-            var startupWindow = StaticHelper.IoCcontainer.Resolve<MainWindowViewModel>();
-            startupWindow.Show();
+            startupWindowSeed.Show();
         }
 
         private static void Loader(IoC ioc)
         {
-            ioc.RegisterSingleton<IFileStore<List<CalendarDay>>, CalendarDayStore>();
             ioc.RegisterSingleton<IXmlStore<FactimeSettings>, FactimeSettingsStore>();
+            ioc.RegisterSingleton<IFileStore<List<CalendarDay>>, CalendarDayStore>();
         }
     }
 }
