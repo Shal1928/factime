@@ -21,12 +21,7 @@ namespace Factime
         private void OnStartup(object sender, StartupEventArgs e)
         {
             Loader(StaticHelper.IoCcontainer);
-            
-            //var startupWindow = new MainWindowViewModel(); //StaticHelper.IoCcontainer.Resolve<MainWindowViewModel>();
-
-            //var mainVM = StaticHelper.IoCcontainer.Resolve(startupWindow.GetType());
             var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(ObserveWrapper.Wrap(typeof(MainWindowViewModel)));
-            //var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(typeof(MainWindowViewModel));
 
             var relationsViewToViewModel = new Dictionary<Type, Type>
                                          {
