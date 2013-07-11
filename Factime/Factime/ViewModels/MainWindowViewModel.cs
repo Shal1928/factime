@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using Factime.Models;
@@ -55,21 +54,6 @@ namespace Factime.ViewModels
 
         #region Other Public Properties
 
-        //private ICollectionView _weekCollection;
-        //public virtual ICollectionView WeekCollection
-        //{
-        //    get
-        //    {
-        //        return _weekCollection;
-        //    }
-        //    set
-        //    {
-        //        _weekCollection = value;
-        //        //OnPropertyChanged(() => WeekCollection);
-        //        //OnPropertyChanged("WeekCollection");
-        //    }
-        //}
-
         public virtual ICollectionView WeekCollection
         {
             get;
@@ -104,7 +88,6 @@ namespace Factime.ViewModels
             set
             {
                 _selectedMonth = value;
-                //OnPropertyChanged(() => SelectedMonth);
                 _isFilterNull = false;
                 UpdateFilterWeekCollections();
             }
@@ -120,28 +103,12 @@ namespace Factime.ViewModels
             set
             {
                 _selectedYear = value;
-                //OnPropertyChanged(() => SelectedYear);
                 _isFilterNull = false;
                 _isImporting = false;
                 OnLoadedCommand();
             }
         }
         
-        //Always true
-        //private bool _selectStateHoliday = true;
-        //public bool SelectStateHoliday
-        //{
-        //    get
-        //    {
-        //        return _selectStateHoliday;
-        //    }
-        //    set
-        //    {
-        //        _selectStateHoliday = value;
-        //        OnPropertyChanged(() => SelectStateHoliday);
-        //    }
-        //}
-
         public bool SelectStateHoliday
         {
             get
@@ -159,64 +126,31 @@ namespace Factime.ViewModels
             set
             {
                 FactimeSettings.OutputPath = value;
-                //OnPropertyChanged(() => OutputPath);
             }
         }
 
-        private string _fileName;
         public virtual string FileName
         {
-            get
-            {
-                return _fileName;
-            }
-            set
-            {
-                _fileName = value;
-                //OnPropertyChanged(() => FileName);
-            }
+            get; 
+            set;
         }
 
-        private int _workdayCount;
         public virtual int WorkdayCount
         {
-            get
-            {
-                return _workdayCount;
-            }
-            set
-            {
-                _workdayCount = value;
-                //OnPropertyChanged(() => WorkdayCount);
-            }
+            get; 
+            set;
         }
 
-        private int _preholidayCount;
         public virtual int PreholidayCount
         {
-            get
-            {
-                return _preholidayCount;
-            }
-            set
-            {
-                _preholidayCount = value;
-                //OnPropertyChanged(() => PreholidayCount);
-            }
+            get; 
+            set;
         }
 
-        private int _holidayCount;
         public virtual int HolidayCount
         {
-            get
-            {
-                return _holidayCount;
-            }
-            set
-            {
-                _holidayCount = value;
-                //OnPropertyChanged(() => HolidayCount);
-            }
+            get; 
+            set;
         }
 
         #endregion
@@ -233,7 +167,6 @@ namespace Factime.ViewModels
             set
             {
                 FactimeSettings.DefaultStart = value;
-                //OnPropertyChanged(() => WorkdayStartTime);
                 UpdateWorkTime(DayType.Workday, value, true);
             }
         }
@@ -247,7 +180,6 @@ namespace Factime.ViewModels
             set
             {
                 FactimeSettings.DefaultEnd = value;
-                //OnPropertyChanged(() => WorkdayEndTime);
                 UpdateWorkTime(DayType.Workday, value, false);
             }
         }
@@ -261,7 +193,6 @@ namespace Factime.ViewModels
             set
             {
                 FactimeSettings.ShortStart = value;
-                //OnPropertyChanged(() => PreholidayStartTime);
                 UpdateWorkTime(DayType.PreHoliday, value, true);
             }
         }
@@ -275,7 +206,6 @@ namespace Factime.ViewModels
             set
             {
                 FactimeSettings.ShortEnd = value;
-                //OnPropertyChanged(() => PreholidayEndTime);
                 UpdateWorkTime(DayType.PreHoliday, value, false);
             }
         }
