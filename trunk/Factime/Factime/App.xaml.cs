@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using Factime.Models;
 using Factime.Stores;
@@ -8,7 +7,6 @@ using Factime.Views;
 using UseAbilities.IoC.Core;
 using UseAbilities.IoC.Helpers;
 using UseAbilities.IoC.Stores;
-using UseAbilities.MVVM.Base;
 using UseAbilities.MVVM.Managers;
 
 namespace Factime
@@ -20,23 +18,26 @@ namespace Factime
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            Loader(StaticHelper.IoCcontainer);
-            var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(ObserveWrapper.Wrap(typeof(MainWindowViewModel)));
+            Loader(IoCManager.Container);
+            //var startupWindowSeed = (MainWindowViewModel)StaticHelper.IoCcontainer.Resolve(ObserveWrapper.Wrap(typeof(MainWindowViewModel)));
 
-            var relationsViewToViewModel = new Dictionary<Type, Type>
-                                         {
-                                            {startupWindowSeed.GetType(), typeof (MainWindowView)}
-                                         };
+            //var relationsViewToViewModel = new Dictionary<Type, Type>
+            //                             {
+            //                                {startupWindowSeed.GetType(), typeof (MainWindowView)}
+            //                             };
 
-            ViewManager.RegisterViewViewModelRelations(relationsViewToViewModel);
-            ViewModelManager.ActiveViewModels.CollectionChanged += ViewManager.OnViewModelsCoolectionChanged;
+            //ViewManager.RegisterViewViewModelRelations(relationsViewToViewModel);
+            //ViewModelManager.ActiveViewModels.CollectionChanged += ViewManager.OnViewModelsCoolectionChanged;
+            AdvancedViewManager.Instance.RegisterRelation<MainWindowViewModel, MainWindowView>();
 
-            startupWindowSeed.Show();
+            AdvancedViewManager.Instance.ResolveAndShow<MainWindowViewModel>();
+
+            //startupWindowSeed.Show();
         }
 
         private static void Loader(IoC ioc)
         {
-            ioc.RegisterSingleton<IXmlStore<FactimeSettings>, FactimeSettingsStore>();
+            ioc.RegisterSingleton<IFileStore<FactimeSettings>, FactimeSettingsStore>();
             ioc.RegisterSingleton<IFileStore<List<CalendarDay>>, CalendarDayStore>();
         }
     }

@@ -7,87 +7,37 @@ using UseAbilities.IoC.Stores;
 
 namespace Factime.Stores
 {
-    public class CalendarDayStore : FileStore<List<CalendarDay>>
+    public class CalendarDayStore : AbstractFileStore<List<CalendarDay>>
     {
-        public CalendarDayStore()
+        #region Singleton implementation
+
+        private CalendarDayStore()
         {
             Owerwrite = true;
         }
 
-        [InjectedProperty]
-        public IXmlStore<FactimeSettings> FactimeSettingsStore
-        {
-            get;
-            set;
-        }
+        private static readonly CalendarDayStore SingleInstance = new CalendarDayStore();
+        public static CalendarDayStore Instance { get { return SingleInstance; } }
 
-        //private FactimeSettings _factimeSettings;
-        //public FactimeSettings FactimeSettings
-        //{
-        //    get
-        //    {
-        //        return _factimeSettings ?? (_factimeSettings = FactimeSettingsStore.Load());
-        //    }
-        //}
+        #endregion
+
+        [InjectedProperty]
+        public IFileStore<FactimeSettings> FactimeSettingsStore { get; set; }
 
         public override void Save(List<CalendarDay> storeObject)
         {
-            try
-            {
-                Directory.CreateDirectory(Directory.GetParent(FileName).FullName);
-                //27.05.2014 08:30 18:30
-                using (var file = new StreamWriter(FileName, !Owerwrite))
-                {
-                    foreach (var calendarDay in storeObject)
-                        file.WriteLine("{1}{0}{2}{0}{3}", Splitter, calendarDay.Date.ToString("dd.MM.yyy"), calendarDay.Start.ToString().Remove(5), calendarDay.End.ToString().Remove(5));
-                }
-            }
-            catch (Exception e)
-            { 
-                throw e;
-            }
+            Save(storeObject, GetFileName());
         }
 
-        public override List<CalendarDay> Load()
+        public override void Save(List<CalendarDay> storeObject, string key)
         {
-            if (!File.Exists(FileName)) return null; //throw new FileNotFoundException(FileName);
-
-            var calendarDayCollection = new List<CalendarDay>();
-
-            try
+            Directory.CreateDirectory(Directory.GetParent(key).FullName);
+            //27.05.2014 08:30 18:30
+            using (var file = new StreamWriter(key, !Owerwrite))
             {
-                //27.05.2014 08:30 18:30
-                using (var file = new StreamReader(FileName))
-                {
-                    while (!file.EndOfStream)  // framework 2.0
-                    {
-                        var readLine = file.ReadLine();
-                        if (readLine == null) throw new Exception("readLine is null!");
-
-                        var factimeSettings = FactimeSettingsStore.Load();
-                        var calendarDayData = readLine.Split(Splitter);
-                        var date = Convert.ToDateTime(calendarDayData[0]);
-                        var start = TimeSpan.Parse(calendarDayData[1]);
-                        var end = TimeSpan.Parse(calendarDayData[2]);
-                        var dayType = end == factimeSettings.DefaultEnd ? DayType.Workday : DayType.PreHoliday;
-
-
-                        calendarDayCollection.Add(new CalendarDay
-                                                      {
-                                                            Date = date,
-                                                            Start = start,
-                                                            End = end,
-                                                            Type = dayType
-                                                      });
-                    }
-                }
+                foreach (var calendarDay in storeObject)
+                    file.WriteLine("{1}{0}{2}{0}{3}", Splitter, calendarDay.Date.ToString("dd.MM.yyy"), calendarDay.Start.ToString().Remove(5), calendarDay.End.ToString().Remove(5));
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return calendarDayCollection;
         }
 
         private char _splitter = ' ';
@@ -101,6 +51,46 @@ namespace Factime.Stores
         {
             get; 
             set;
+        }
+
+        public override List<CalendarDay> Load()
+        {
+            return Load(GetFileName());
+        }
+
+        public override List<CalendarDay> Load(string key)
+        {
+            if (!File.Exists(key)) return null; //throw new FileNotFoundException(FileName);
+
+            var calendarDayCollection = new List<CalendarDay>();
+
+            //27.05.2014 08:30 18:30
+            using (var file = new StreamReader(key))
+            {
+                while (!file.EndOfStream)  // framework 2.0
+                {
+                    var readLine = file.ReadLine();
+                    if (readLine == null) throw new Exception("readLine is null!");
+
+                    var factimeSettings = FactimeSettingsStore.Load();
+                    var calendarDayData = readLine.Split(Splitter);
+                    var date = Convert.ToDateTime(calendarDayData[0]);
+                    var start = TimeSpan.Parse(calendarDayData[1]);
+                    var end = TimeSpan.Parse(calendarDayData[2]);
+                    var dayType = end == factimeSettings.DefaultEnd ? DayType.Workday : DayType.PreHoliday;
+
+
+                    calendarDayCollection.Add(new CalendarDay
+                    {
+                        Date = date,
+                        Start = start,
+                        End = end,
+                        Type = dayType
+                    });
+                }
+            }
+
+            return calendarDayCollection;
         }
     }
 }
