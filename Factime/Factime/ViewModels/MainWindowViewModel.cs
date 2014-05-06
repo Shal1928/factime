@@ -36,7 +36,7 @@ namespace Factime.ViewModels
         #region InjectedProperty
 
         [InjectedProperty]
-        public IXmlStore<FactimeSettings> FactimeSettingsStore
+        public IFileStore<FactimeSettings> FactimeSettingsStore
         {
             get; 
             set;
@@ -385,7 +385,7 @@ namespace Factime.ViewModels
                 FactimeSettings.DefaultHolidaysCollection.AddRange(week.GetStateHolidays().Select(day=> day.Date));
 
             var applicationDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (!string.IsNullOrEmpty(applicationDir)) FactimeSettingsStore.FileName = Path.Combine(applicationDir, FactimeSettingsStore.FileName);
+            if (!string.IsNullOrEmpty(applicationDir)) FactimeSettingsStore.SetFileName(Path.Combine(applicationDir, FactimeSettingsStore.GetFileName()));
 
             FactimeSettingsStore.Save(FactimeSettings);
 
@@ -441,7 +441,7 @@ namespace Factime.ViewModels
         private void OnImportCommand()
         {
             UpdateWorkTime();
-            CalendarDayStore.FileName = FileName;
+            CalendarDayStore.SetFileName(FileName);
             _isFilterNull = false;
             _isImporting = true;
             OnLoadedCommand();
@@ -471,7 +471,7 @@ namespace Factime.ViewModels
             foreach (WeekWrapper week in WeekCollection)
                 exportCalendarDayCollection.AddRange(week.GetExportDays());
 
-            CalendarDayStore.FileName = FileName;
+            CalendarDayStore.SetFileName(FileName);
             CalendarDayStore.Save(exportCalendarDayCollection);
 
             WeekCollection.Filter = filter;

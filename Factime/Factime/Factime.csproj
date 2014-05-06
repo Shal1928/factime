@@ -96,8 +96,6 @@
     <Compile Include="Models\WeekWrapper.cs" />
     <Compile Include="Stores\CalendarDayStore.cs" />
     <Compile Include="Stores\FactimeSettingsStore.cs" />
-    <Compile Include="Stores\FileStore.cs" />
-    <Compile Include="Stores\XMLStore.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -157,46 +155,46 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Controls\UseAbilities.Controls.csproj">
-      <Project>{430AC6DC-ABB3-40AD-8960-9DE701320537}</Project>
-      <Name>UseAbilities.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.DotNet\UseAbilities.DotNet.csproj">
-      <Project>{6E37988B-27F8-4DCF-8CDA-AA585AAADDE3}</Project>
-      <Name>UseAbilities.DotNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Extensions\UseAbilities.Extensions.csproj">
-      <Project>{C3286D0A-9826-4681-AB99-E0056239D253}</Project>
-      <Name>UseAbilities.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.IoC\UseAbilities.IoC.csproj">
-      <Project>{B855AE04-A938-472C-BA0A-1A546D5A3FEB}</Project>
-      <Name>UseAbilities.IoC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.MVVM\UseAbilities.MVVM.csproj">
-      <Project>{8AC0BF72-84A5-4E2E-9A85-1DEF2167B51E}</Project>
-      <Name>UseAbilities.MVVM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Visual\UseAbilities.Visual.csproj">
-      <Project>{9267C3C2-5D30-45CD-ABF0-27E262E7EC58}</Project>
-      <Name>UseAbilities.Visual</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.WPF\UseAbilities.WPF.csproj">
-      <Project>{DE840968-7F50-41F7-B88A-59ADD6B61D73}</Project>
-      <Name>UseAbilities.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.XML\UseAbilities.XML.csproj">
-      <Project>{F4863115-63AF-4DBC-A8EE-9771426DAEB0}</Project>
-      <Name>UseAbilities.XML</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\cal 16.png" />
     <Resource Include="Images\cal 24.png" />
     <Resource Include="Images\cal 32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.Controls\UseAbilities.Controls.csproj">
+      <Project>{430ac6dc-abb3-40ad-8960-9de701320537}</Project>
+      <Name>UseAbilities.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.DotNet\UseAbilities.DotNet.csproj">
+      <Project>{6e37988b-27f8-4dcf-8cda-aa585aaadde3}</Project>
+      <Name>UseAbilities.DotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.Extensions\UseAbilities.Extensions.csproj">
+      <Project>{c3286d0a-9826-4681-ab99-e0056239d253}</Project>
+      <Name>UseAbilities.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.IoC\UseAbilities.IoC.csproj">
+      <Project>{b855ae04-a938-472c-ba0a-1a546d5a3feb}</Project>
+      <Name>UseAbilities.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.MVVM\UseAbilities.MVVM.csproj">
+      <Project>{8ac0bf72-84a5-4e2e-9a85-1def2167b51e}</Project>
+      <Name>UseAbilities.MVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.Visual\UseAbilities.Visual.csproj">
+      <Project>{9267c3c2-5d30-45cd-abf0-27e262e7ec58}</Project>
+      <Name>UseAbilities.Visual</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.WPF\UseAbilities.WPF.csproj">
+      <Project>{de840968-7f50-41f7-b88a-59add6b61d73}</Project>
+      <Name>UseAbilities.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UseAbilities\UseAbilities\UseAbilities.XML\UseAbilities.XML.csproj">
+      <Project>{f4863115-63af-4dbc-a8ee-9771426daeb0}</Project>
+      <Name>UseAbilities.XML</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

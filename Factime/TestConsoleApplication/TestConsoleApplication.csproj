@@ -46,12 +46,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\UseAbilities\UseAbilities.Extensions\UseAbilities.Extensions.csproj">
-      <Project>{C3286D0A-9826-4681-AB99-E0056239D253}</Project>
-      <Name>UseAbilities.Extensions</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
